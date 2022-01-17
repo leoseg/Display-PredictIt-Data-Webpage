@@ -42,8 +42,8 @@ dependencies {
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'org.hsqldb:hsqldb'
-    testRuntimeOnly 'com.h2database:h2'
+    testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.postgresql:postgresql'
 }
 
 dependencyManagement {
