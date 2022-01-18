@@ -21,10 +21,7 @@ public class ContractLogDayService implements ContractLogService{
 
 
     @Override
-    public HashMap<String, List<ContractLog>> getLabelContractLogMap(String label, Date date) {
-        List<ContractLog> contractLogList = contractLogDayDao.getListOfContractLogs(date,label);
-        HashMap<String, List<ContractLog>> labelContractLogMap = new HashMap<>();
-        labelContractLogMap.put(label,contractLogList);
-        return labelContractLogMap;
+    public List<ContractLog> getContractLogList(String label, Date date) {
+        return  contractLogDayDao.getListOfContractLogs(date,label);
     }
 }

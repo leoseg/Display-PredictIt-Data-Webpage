@@ -4,29 +4,26 @@ package com.webpage.predictpoliticalpartyprice.testServices;
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.annotation.Resource;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class testContractLogService {
+public class ContractLogServiceTest {
 
     @Resource
     @Qualifier("week")
@@ -54,11 +51,10 @@ public class testContractLogService {
     @ParameterizedTest
     @MethodSource("generateDayTestData")
     void testIfCorrectEntriesForDayAreReturned(String label, Date date,List<ContractLog> exspected) {
-        HashMap<String,List<ContractLog>> result = contractLogDayService.getLabelContractLogMap(label,date);
-        List<ContractLog> contractLogList = result.get(label);
+        List<ContractLog> result = contractLogDayService.getContractLogList(label,date);
         int i =0;
-        for (ContractLog contractLog : contractLogList) {
-            Assert.assertEquals(contractLog.getTradePrice(),exspected.get(i).getTradePrice(),0.0001);
+        for (ContractLog contractLog : result) {
+            Assertions.assertEquals(contractLog.getTradePrice(), exspected.get(i).getTradePrice(), 0.0001);
             assert(contractLog.getTimestamp().equals(exspected.get(i).getTimestamp()));
             i++;
         }
@@ -83,11 +79,10 @@ public class testContractLogService {
     @ParameterizedTest
     @MethodSource("generateWeekTestData")
     void testIfCorrectEntriesForWeekAreReturned(String label, Date date,List<ContractLog> exspected){
-        HashMap<String,List<ContractLog>> result = contractLogWeekService.getLabelContractLogMap(label,date);
-        List<ContractLog> contractLogList = result.get(label);
+        List<ContractLog>result = contractLogWeekService.getContractLogList(label,date);
         int i =0;
-        for (ContractLog contractLog : contractLogList) {
-            Assert.assertEquals(contractLog.getTradePrice(),exspected.get(i).getTradePrice(),0.0001);
+        for (ContractLog contractLog : result) {
+            Assertions.assertEquals(contractLog.getTradePrice(), exspected.get(i).getTradePrice(), 0.0001);
             assert(contractLog.getTimestamp().equals(exspected.get(i).getTimestamp()));
             i++;
         }
