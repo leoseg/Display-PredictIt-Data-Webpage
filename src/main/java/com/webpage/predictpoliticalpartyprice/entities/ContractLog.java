@@ -4,13 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jdbc.core.convert.Jsr310TimestampBasedConverters;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 public class ContractLog {
 
     @Getter
     @Setter
-    Timestamp timestamp;
+    Instant timestamp;
 
     @Getter
     @Setter
@@ -18,7 +18,7 @@ public class ContractLog {
 
     public ContractLog(){}
 
-    public ContractLog(Double tradePrice, Timestamp timestamp){
+    public ContractLog(Double tradePrice, Instant timestamp){
         setTradePrice(tradePrice);
         setTimestamp(timestamp);
     }

@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository(value="daydao")
@@ -19,7 +20,7 @@ public class ContractLogDayDao implements ContractLogDao {
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<ContractLog> getListOfContractLogs(Date date, String Label) {
+    public List<ContractLog> getListOfContractLogs(LocalDate date, String Label) {
 
         final String sqlStatement= "" +
                 "SELECT AVG(\"contract_log\".\"last_trade_price\"), " +
@@ -29,7 +30,7 @@ public class ContractLogDayDao implements ContractLogDao {
                 "WHERE \"contractdata\".\"label\" = '+Label+' AND  DATE((\"contract_log\".\"time_stamp\" at time zone  'Asia/Pontianak') at time zone 'Europe/Berlin') = '"+date+"' "+
                 "GROUP BY timestamp";
 
-        List query = jdbcTemplate.query(sqlStatement, this.contractLogRowMapper);
-        return query;
+        return jdbcTemplate.query(sqlStatement, this.contractLogRowMapper);
+
     }
 }

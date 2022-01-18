@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class ContractLogDayService implements ContractLogService{
 
 
     @Override
-    public List<ContractLog> getContractLogList(String label, Date date) {
+    public List<ContractLog> getContractLogList(String label, LocalDate date) {
         return  contractLogDayDao.getListOfContractLogs(date,label);
     }
 }
