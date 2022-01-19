@@ -1,10 +1,8 @@
-package com.webpage.predictpoliticalpartyprice.testServices;
+package com.webpage.predictpoliticalpartyprice.servicetests;
 
 
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
-import org.apache.tomcat.jni.Local;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -16,8 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 import javax.annotation.Resource;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -66,15 +62,15 @@ public class ContractLogServiceTest {
 
     static Stream<Arguments> generateWeekTestData() {
         return Stream.of(
-                Arguments.of("conservative", LocalDate.parse("2021-12-02"), Arrays.asList(
+                Arguments.of("conservative", LocalDate.parse("2021-12-03"), Arrays.asList(
                         new ContractLog(0.2, Instant.parse("2021-11-30T00:00:00Z")),
                         new ContractLog(0.75, Instant.parse("2021-12-01T00:00:00Z")),
-                        new ContractLog(0.38333333333333336, Instant.parse("2021-12-02T00:00:00Z"))
+                        new ContractLog(0.38333333333333336, Instant.parse("2021-12-03T00:00:00Z"))
                 )),
-                Arguments.of("liberal", LocalDate.parse("2021-12-03"), Arrays.asList(
-                        new ContractLog(0.15, Instant.parse("2021-11-29T00:00:00Z")),
+                Arguments.of("liberal", LocalDate.parse("2021-12-04"), Arrays.asList(
+                        new ContractLog(0.15, Instant.parse("2021-11-30T00:00:00Z")),
                         new ContractLog(0.3, Instant.parse("2021-12-02T00:00:00Z")),
-                        new ContractLog(0.4, Instant.parse("2021-12-03T00:00:00Z"))
+                        new ContractLog(0.4, Instant.parse("2021-12-04T00:00:00Z"))
                 ))
         );
     }

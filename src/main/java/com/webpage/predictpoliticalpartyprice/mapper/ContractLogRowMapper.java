@@ -14,7 +14,8 @@ public class ContractLogRowMapper implements RowMapper<ContractLog> {
     @Override
     public ContractLog mapRow(ResultSet rs, int rowNum) throws SQLException {
         ContractLog contractLog = new ContractLog();
-        contractLog.setTimestamp(rs.getTimestamp(2).toInstant().plus(1, ChronoUnit.HOURS));
+        //Add one hour because to instant is subtracting one hour
+        contractLog.setTimestamp(rs.getTimestamp(2).toInstant().plus(1,ChronoUnit.HOURS));
         contractLog.setTradePrice(rs.getDouble(1));
         return contractLog;
     }
