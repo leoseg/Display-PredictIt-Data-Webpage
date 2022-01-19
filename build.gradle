@@ -46,6 +46,7 @@ dependencies {
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.postgresql:postgresql'
+    testImplementation 'com.h2database:h2'
     testImplementation group: 'org.jeasy', name: 'easy-random-core', version: '4.0.0'
 
 }

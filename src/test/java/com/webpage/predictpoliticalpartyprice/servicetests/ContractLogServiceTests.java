@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class ContractLogServiceTest {
+public class ContractLogServiceTests {
 
     @Resource
     @Qualifier("week")

@@ -2,13 +2,9 @@ package com.webpage.predictpoliticalpartyprice.controllertests;
 
 import com.webpage.predictpoliticalpartyprice.controller.PlotController;
 import com.webpage.predictpoliticalpartyprice.dao.UserRepository;
-import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
 import com.webpage.predictpoliticalpartyprice.plotclasses.ContractLogPlot;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
-import org.jeasy.random.EasyRandom;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,7 +13,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.testcontainers.shaded.org.hamcrest.Matchers;
 
 import javax.sql.DataSource;
 
@@ -26,15 +21,12 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 @WebMvcTest(controllers = PlotController.class)
-class PlotControllerTest {
+class PlotControllerTests {
 
     @Autowired
     private MockMvc mockMvc;

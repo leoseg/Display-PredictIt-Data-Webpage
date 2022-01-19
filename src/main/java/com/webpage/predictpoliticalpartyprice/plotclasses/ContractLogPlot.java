@@ -27,15 +27,12 @@ import java.util.List;
 public class ContractLogPlot {
 
     TimeSeriesCollection timeSeriesCollection;
-
-    @Getter@Setter
-    String title;
     JFreeChart chart;
 
 
 
 
-    public void addContractLogList(List<ContractLog> contractLogList, String label){
+    private void addContractLogList(List<ContractLog> contractLogList, String label){
         TimeSeries timeSeries = new TimeSeries(label);
 
         //Timeseries is adding two hours to each timestamp so it needs to be subtracted
