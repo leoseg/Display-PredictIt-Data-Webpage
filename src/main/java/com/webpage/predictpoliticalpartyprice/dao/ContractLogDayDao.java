@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Gets the contracts log of the given date grouped in 10 minute intervals
+ */
 @Repository(value="daydao")
 public class ContractLogDayDao implements ContractLogDao {
 

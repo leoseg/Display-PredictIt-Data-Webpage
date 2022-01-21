@@ -8,9 +8,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * For mapping the resultset to the contractlog object
+ */
 @Component
 public class ContractLogRowMapper implements RowMapper<ContractLog> {
-
+    /**
+     * Maps the given result set with the timestamp and tradeprice columns to a contractlog object
+     * @param rs resultset of query
+     * @param rowNum rowNum of resultset
+     * @return contractlog object
+     * @throws SQLException exception of sql query
+     */
     @Override
     public ContractLog mapRow(ResultSet rs, int rowNum) throws SQLException {
         ContractLog contractLog = new ContractLog();

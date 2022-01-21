@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Gets list of contract logs of the last 7 days
+ */
 @Service(value="week")
 public class ContractLogWeekService implements ContractLogService{
 
@@ -17,7 +20,12 @@ public class ContractLogWeekService implements ContractLogService{
     @Qualifier("weekdao")
     ContractLogDao contractLogWeekDao;
 
-
+    /**
+     * Gets contract log list with same label grouped by the day
+     * @param label label of contratlogs
+     * @param date date for getting the data
+     * @return  list of contractlog object
+     */
     @Override
     public List<ContractLog> getContractLogList(String label, LocalDate date) {
         return contractLogWeekDao.getListOfContractLogs(date,label);

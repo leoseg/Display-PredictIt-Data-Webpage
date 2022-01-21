@@ -10,6 +10,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Gets the contract logs of the last 7 days of the given date grouped in day intervals
+ */
 @Repository(value="weekdao")
 public class ContractLogWeekDao implements ContractLogDao {
 

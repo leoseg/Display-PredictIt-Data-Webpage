@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.LocalDate;
 
-
+/**
+ * Controller for showing the plots
+ */
 @Controller
 @RequestMapping("/plot")
 public class PlotController {
@@ -42,7 +44,9 @@ public class PlotController {
     public ServletRegistrationBean MyServlet() {
         return new ServletRegistrationBean<>(new DisplayChart(),"/chart");
     }
-
+    /*
+    Shows plot of the last 7 days, takes date as input parameter
+     */
     @PostMapping(value="/week")
     public String showWeekPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
@@ -52,6 +56,9 @@ public class PlotController {
         return "weekplot";
     }
 
+    /*
+    Shows plot of the data of the day, takes date as input parameter
+     */
     @PostMapping(value="/day")
     public String showDayPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
@@ -60,7 +67,9 @@ public class PlotController {
         model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
         return "dayplot";
     }
-
+    /*
+    Shows the homepage of plots, with one button leading to the dayplot and one to the weekplot
+     */
     @GetMapping()
     public String showPlotHome(Model model){
         model.addAttribute("localDate", LocalDate.now());
