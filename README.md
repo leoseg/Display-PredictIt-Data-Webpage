@@ -6,8 +6,11 @@ https.webpage.de
 ## Data displayed
 
 I took 5 different bets from predictit and labeled their contract outcomes by a liberal or conservative political direction. For example Victor Orban reelected is labeled as conservative.
+
 There are two plots, in both plots the data is grouped by their average tradeprice and their timestamps.
-In the dayplot the data is grouped in 10 minutes intervals for the current date. In the week date the data is grouped for each day and the last 7 days are shown.
+
+In the dayplot the data is grouped in 10 minutes intervals for the current date. 
+In the week date the data is grouped for each day and the last 7 days are shown.
 
 
 ## Architecture
