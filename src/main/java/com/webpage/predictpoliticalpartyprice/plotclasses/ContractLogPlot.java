@@ -59,7 +59,7 @@ public class ContractLogPlot {
 
     /**
      * Saves chart as jpeg
-     * @param request servletrequest for displaying chart
+     * @param request servletrequest with request parameters
      * @return url to the chat
      * @throws IOException caused by ServletUtilities.saveChartAsJPEG
      */

@@ -45,7 +45,7 @@ public class PlotController {
         return new ServletRegistrationBean<>(new DisplayChart(),"/chart");
     }
     /*
-    Shows plot of the last 7 days, takes date as input parameter
+    Creates and shows plot of the last 7 days, takes date as input parameter from the plot info object
      */
     @PostMapping(value="/week")
     public String showWeekPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
@@ -57,7 +57,7 @@ public class PlotController {
     }
 
     /*
-    Shows plot of the data of the day, takes date as input parameter
+    Creates and shows plot of the data of the day, takes date as input parameter from the plotinfo object
      */
     @PostMapping(value="/day")
     public String showDayPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
