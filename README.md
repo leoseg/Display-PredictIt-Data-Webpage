@@ -1,5 +1,5 @@
 # Display-PredictIt-Data-Webpage
-Webapplication project which displays the data collected by my other project predictit-stream. The page is hosted with google cloud and available at:
+Webapplication project which displays the data collected by my other project PredictitDataProcessing. The page is hosted with google cloud and available at:
 
 https.webpage.de
 
