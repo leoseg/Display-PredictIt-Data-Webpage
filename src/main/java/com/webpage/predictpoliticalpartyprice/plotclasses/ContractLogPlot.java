@@ -43,7 +43,7 @@ public class ContractLogPlot {
 
         //Timeseries is adding one hours to each timestamp so it needs to be subtracted (coming from the calendartime)
         for(ContractLog contractLog: contractLogList){
-            timeSeries.add(new Millisecond(Date.from(contractLog.getTimestamp().minus(1, ChronoUnit.HOURS))),contractLog.getTradePrice());
+            timeSeries.add(new Millisecond(Date.from(contractLog.getTimestamp())),contractLog.getTradePrice());//.minus(1, ChronoUnit.HOURS))),contractLog.getTradePrice());
         }
         timeSeriesCollection.addSeries(timeSeries);
     }
