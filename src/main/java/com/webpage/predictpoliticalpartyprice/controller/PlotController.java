@@ -53,6 +53,7 @@ public class PlotController {
         contractLogPlot.addContractLogLists(contractLogWeekService,date,"liberal","conservative");
         contractLogPlot.createChart("Data of the last 7 days since "+date);
         model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
+        model.addAttribute("localDate", LocalDate.now());
         return "weekplot";
     }
 
@@ -65,6 +66,7 @@ public class PlotController {
         contractLogPlot.addContractLogLists(contractLogDayService,date,"liberal","conservative");
         contractLogPlot.createChart("Data for the date "+date);
         model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
+        model.addAttribute("localDate", LocalDate.now());
         return "dayplot";
     }
     /*
