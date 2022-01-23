@@ -2,11 +2,11 @@ package com.webpage.predictpoliticalpartyprice.dao;
 
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
 import com.webpage.predictpoliticalpartyprice.mapper.ContractLogRowMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 
+import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,10 +16,10 @@ import java.util.List;
 @Repository(value="daydao")
 public class ContractLogDayDao implements ContractLogDao {
 
-    @Autowired
+    @Resource
     ContractLogRowMapper contractLogRowMapper;
 
-    @Autowired
+    @Resource
     JdbcTemplate jdbcTemplate;
 
     @Override

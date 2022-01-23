@@ -2,6 +2,7 @@ package com.webpage.predictpoliticalpartyprice.services;
 
 import com.webpage.predictpoliticalpartyprice.dao.ContractLogDao;
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

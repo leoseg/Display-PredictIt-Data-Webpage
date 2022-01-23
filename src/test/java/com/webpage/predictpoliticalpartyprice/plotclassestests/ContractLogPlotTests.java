@@ -6,13 +6,14 @@ import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpServletRequest;
+
+import javax.annotation.Resource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
@@ -27,7 +28,7 @@ import static org.mockito.Mockito.when;
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class ContractLogPlotTests {
 
-    @Autowired
+    @Resource
     ContractLogPlot contractLogPlot;
 
     @MockBean

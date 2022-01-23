@@ -4,11 +4,12 @@ package com.webpage.predictpoliticalpartyprice.daotests;
 import com.webpage.predictpoliticalpartyprice.dao.UserRepository;
 import com.webpage.predictpoliticalpartyprice.entities.User;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+
+import javax.annotation.Resource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class UserRepositoryTests {
 
-    @Autowired
+    @Resource
     private TestEntityManager entityManager;
 
-    @Autowired
+    @Resource
     private UserRepository repo;
 
     @Test

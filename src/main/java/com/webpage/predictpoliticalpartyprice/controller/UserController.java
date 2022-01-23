@@ -2,7 +2,7 @@ package com.webpage.predictpoliticalpartyprice.controller;
 
 import com.webpage.predictpoliticalpartyprice.dao.UserRepository;
 import com.webpage.predictpoliticalpartyprice.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
+
 @Controller
 @RequestMapping("/")
 public class UserController {
-    @Autowired
+
+    @Resource
     private UserRepository userRepo;
 
 
