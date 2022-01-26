@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
 </head>
 <body>
-<div class="container text-center"></div>
 <h1>Predict Political Party Price</h1>
-<div class="container text-center"></div>
-<h3>Get data of the week</h3>
+<div class="all-classes-container">
+<h3>Get data of the week:</h3>
 <form method="post" th:action="@{/plot/week(date=${#temporals.format(localDate, 'yyyy-MM-DD')})}">
     <button type="submit" name="submit" value="value" class="link-button">Week Data</button>
 </form>
-<div class="container text-center"></div>
-<h3>Get data of the day</h3>
+<h3>Get data of the day:</h3>
 <form method="post" th:action="@{/plot/day(date=${#temporals.format(localDate, 'yyyy-MM-DD')})}">
     <button type="submit" name="submit" value="value" class="link-button">Day Data</button>
 </form>
+</div>
 
 
 </body>
