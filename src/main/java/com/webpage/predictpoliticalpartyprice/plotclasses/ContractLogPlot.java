@@ -2,16 +2,12 @@ package com.webpage.predictpoliticalpartyprice.plotclasses;
 
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
-import lombok.Getter;
-import lombok.Setter;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.servlet.ServletUtilities;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 
@@ -20,7 +16,6 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 /**
@@ -38,7 +33,7 @@ public class ContractLogPlot {
      * @param contractLogList list to ad
      * @param label label of the timeseries
      */
-    private void addContractLogList(List<ContractLog> contractLogList, String label){
+    private void addContractLogs(List<ContractLog> contractLogList, String label){
         TimeSeries timeSeries = new TimeSeries(label);
 
         //Timeseries is adding one hours to each timestamp so it needs to be subtracted (coming from the calendartime)
@@ -74,10 +69,10 @@ public class ContractLogPlot {
      * @param date date for getting the data from
      * @param labels for each label a list of contractlogs is added
      */
-    public void addContractLogLists(ContractLogService contractLogService, LocalDate date, String... labels){
+    public void addContractLogsByLabel(ContractLogService contractLogService, LocalDate date, String... labels){
         this.timeSeriesCollection = new TimeSeriesCollection();
         for(String label: labels){
-            addContractLogList(contractLogService.getContractLogList(label,date),label);
+            addContractLogs(contractLogService.getContractLogsByLabel(label,date),label);
         }
     }
 

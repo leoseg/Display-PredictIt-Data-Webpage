@@ -2,7 +2,6 @@ package com.webpage.predictpoliticalpartyprice.services;
 
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,5 +16,5 @@ public interface ContractLogService {
      * @param date date for getting the data
      * @return list of contractlogs object
      */
-    List<ContractLog> getContractLogList(String label, LocalDate date);
+    List<ContractLog> getContractLogsByLabel(String label, LocalDate date);
 }

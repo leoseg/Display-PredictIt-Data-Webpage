@@ -1,6 +1,6 @@
 package com.webpage.predictpoliticalpartyprice;
-
-import com.webpage.predictpoliticalpartyprice.dao.ContractLogDao;
+import com.webpage.predictpoliticalpartyprice.dao.ContractLogDayDao;
+import com.webpage.predictpoliticalpartyprice.dao.ContractLogWeekDao;
 import com.webpage.predictpoliticalpartyprice.mapper.ContractLogRowMapper;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
 import org.junit.jupiter.api.Assertions;
@@ -25,12 +25,10 @@ class PredictPoliticalPartyPriceApplicationTests {
     ContractLogRowMapper contractLogRowMapper;
 
     @Resource
-    @Qualifier("weekdao")
-    ContractLogDao contractLogDaoWeek;
+    ContractLogDayDao contractLogDaoWeek;
 
     @Resource
-    @Qualifier("daydao")
-    ContractLogDao contractLogDaoDay;
+    ContractLogWeekDao contractLogDaoDay;
 
 
     @Test

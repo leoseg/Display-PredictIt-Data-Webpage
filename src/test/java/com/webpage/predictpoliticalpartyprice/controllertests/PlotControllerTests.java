@@ -5,7 +5,6 @@ import com.webpage.predictpoliticalpartyprice.dao.UserRepository;
 import com.webpage.predictpoliticalpartyprice.plotclasses.ContractLogPlot;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -57,7 +56,7 @@ class PlotControllerTests {
 
         verify(contractLogPlot,times(1)).createChart("Data of the last 7 days since 2022-12-02");
         verify(contractLogPlot,times(1)).saveAsJpgServlet(any());
-        verify(contractLogPlot,times(1)).addContractLogLists(contractLogWeekService,LocalDate.parse("2022-12-02"),"liberal","conservative");
+        verify(contractLogPlot,times(1)).addContractLogsByLabel(contractLogWeekService,LocalDate.parse("2022-12-02"),"liberal","conservative");
     }
 
     @MockBean
@@ -79,7 +78,7 @@ class PlotControllerTests {
 
         verify(contractLogPlot,times(1)).createChart("Data for the date 2022-12-02");
         verify(contractLogPlot,times(1)).saveAsJpgServlet(any());
-        verify(contractLogPlot,times(1)).addContractLogLists(contractLogDayService,LocalDate.parse("2022-12-02"),"liberal","conservative");
+        verify(contractLogPlot,times(1)).addContractLogsByLabel(contractLogDayService,LocalDate.parse("2022-12-02"),"liberal","conservative");
     }
 
     @Test

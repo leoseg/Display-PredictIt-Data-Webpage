@@ -49,9 +49,9 @@ public class ContractLogPlotTests {
     @Test
     public void testChartCreation() throws IOException {
         MockHttpServletRequest request = new MockHttpServletRequest();
-        when(contractLogService.getContractLogList("label1",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList);
-        when(contractLogService.getContractLogList("label2",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList2);
-        contractLogPlot.addContractLogLists(contractLogService, LocalDate.parse("2021-12-03"),"label1","label2");
+        when(contractLogService.getContractLogsByLabel("label1",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList);
+        when(contractLogService.getContractLogsByLabel("label2",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList2);
+        contractLogPlot.addContractLogsByLabel(contractLogService, LocalDate.parse("2021-12-03"),"label1","label2");
         contractLogPlot.createChart(("testchart"));
         String testurl = contractLogPlot.saveAsJpgServlet(request);
         assertThat(testurl).matches("^/chart.*jpeg$");

@@ -50,7 +50,7 @@ public class PlotController {
     @PostMapping(value="/week")
     public String showWeekPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
-        contractLogPlot.addContractLogLists(contractLogWeekService,date,"liberal","conservative");
+        contractLogPlot.addContractLogsByLabel(contractLogWeekService,date,"liberal","conservative");
         contractLogPlot.createChart("Data of the last 7 days since "+date);
         model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
         model.addAttribute("localDate", LocalDate.now());
@@ -63,7 +63,7 @@ public class PlotController {
     @PostMapping(value="/day")
     public String showDayPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
-        contractLogPlot.addContractLogLists(contractLogDayService,date,"liberal","conservative");
+        contractLogPlot.addContractLogsByLabel(contractLogDayService,date,"liberal","conservative");
         contractLogPlot.createChart("Data for the date "+date);
         model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
         model.addAttribute("localDate", LocalDate.now());
