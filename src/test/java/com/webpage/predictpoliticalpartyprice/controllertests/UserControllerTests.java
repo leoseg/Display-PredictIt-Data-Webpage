@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -56,7 +57,8 @@ public class UserControllerTests {
                         .param("username","testuser")
                         .param("email","testemail@googlemail.com")
                         .param("password","testpassword")
-                        .param("id","1234"))
+                        .param("id","1234")
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("register_success"));
         verify(userRepository,times(1)).save(userArgumentCaptor.capture());

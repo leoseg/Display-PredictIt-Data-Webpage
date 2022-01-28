@@ -1,7 +1,7 @@
 # Display-PredictIt-Data-Webpage
 Webapplication project which displays the data collected by my other project PredictitDataProcessing. The page is hosted with google cloud and available at:
 
-https.webpage.de
+35.210.210.201:8080/plot
 
 ## Data displayed
 
