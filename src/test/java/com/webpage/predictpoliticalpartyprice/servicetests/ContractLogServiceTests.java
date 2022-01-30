@@ -49,10 +49,10 @@ public class ContractLogServiceTests {
 
     @ParameterizedTest
     @MethodSource("generateDayTestData")
-    void testIfCorrectEntriesForDayAreReturned(String label, LocalDate date, List<ContractLog> exspected) {
-        List<ContractLog> result = contractLogDayService.getContractLogsByLabel(label,date);
+    void givenLabelDate_whenContractLogDayServiceGetsContractLogsByLabel_thenActualShouldBeEqualExspected(String label, LocalDate date, List<ContractLog> exspected) {
+        List<ContractLog> actual = contractLogDayService.getContractLogsByLabel(label,date);
         int i =0;
-        for (ContractLog contractLog : result) {
+        for (ContractLog contractLog : actual) {
             Assertions.assertEquals(contractLog.getTradePrice(), exspected.get(i).getTradePrice(), 0.0001);
             assert(contractLog.getTimestamp().equals(exspected.get(i).getTimestamp()));
             i++;
@@ -77,7 +77,7 @@ public class ContractLogServiceTests {
 
     @ParameterizedTest
     @MethodSource("generateWeekTestData")
-    void testIfCorrectEntriesForWeekAreReturned(String label, LocalDate date,List<ContractLog> exspected){
+    void givenLabelDate_whenContractLogWeekServiceGetsContractLogsByLabel_thenActualShouldBeEqualExspected(String label, LocalDate date,List<ContractLog> exspected){
         List<ContractLog>result = contractLogWeekService.getContractLogsByLabel(label,date);
         int i =0;
         for (ContractLog contractLog : result) {

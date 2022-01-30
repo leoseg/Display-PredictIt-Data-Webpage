@@ -39,7 +39,7 @@ public class UserControllerTests {
 
 
     @Test
-    public void testShowRegistrationForm() throws Exception{
+    public void whenGetRegister_thenRegistrationFormReturned() throws Exception{
         this.mockMvc.perform(get("/register"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("registration_form"))
@@ -49,7 +49,7 @@ public class UserControllerTests {
 
 
     @Test
-    public void testProcessRegister() throws Exception{
+    public void givenUserData_whenPostProcessRegister_thenRegisterSucessReturnedAndUserCreated() throws Exception{
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
 
 
@@ -69,7 +69,7 @@ public class UserControllerTests {
 
     }
     @Test
-    public void testViewLoginpage() throws Exception{
+    public void whenGetLogin_thenLoginViewReturned() throws Exception{
         this.mockMvc.perform(get("/login"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("login"));

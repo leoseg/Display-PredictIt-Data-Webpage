@@ -24,20 +24,20 @@ public class UserRepositoryTests {
     private UserRepository repo;
 
     @Test
-    public void testCreateUser(){
-        User user = new User();
-        user.setEmail("testuser@gmail.com");
-        user.setPassword("testuser202201");
-        user.setUsername("testuser");
+    public void givenUser_whenRepoSaveUser_thenEntityManagerFindUserShouldFindUser(){
+        User exspectedUser = new User();
+        exspectedUser.setEmail("testuser@gmail.com");
+        exspectedUser.setPassword("testuser202201");
+        exspectedUser.setUsername("testuser");
 
 
-        User savedUser = repo.save(user);
+        User savedUser = repo.save(exspectedUser);
 
-        User existUser = entityManager.find(User.class, savedUser.getId());
+        User actualUser = entityManager.find(User.class, savedUser.getId());
 
-        assertThat(user.getEmail()).isEqualTo(existUser.getEmail());
-        assertThat(user.getPassword()).isEqualTo(existUser.getPassword());
-        assertThat(user.getUsername()).isEqualTo(existUser.getUsername());
+        assertThat(exspectedUser.getEmail()).isEqualTo(actualUser.getEmail());
+        assertThat(exspectedUser.getPassword()).isEqualTo(actualUser.getPassword());
+        assertThat(exspectedUser.getUsername()).isEqualTo(actualUser.getUsername());
     }
 
 }

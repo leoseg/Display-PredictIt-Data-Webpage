@@ -45,18 +45,18 @@ class PlotControllerTests {
 
     @Test
     @WithMockUser
-    void showWeekPlot() throws Exception {
+    void givenDate_whenPostPlotWeek_thenWeekPlotViewWithChartReturned() throws Exception {
         when(contractLogPlot.saveAsJpgServlet(any())).thenReturn("ploturl");
         this.mockMvc
                 .perform(post("/plot/week").with(csrf())
-                        .param("date","2022-12-02"))
+                        .param("date", "2022-12-02"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("weekplot"))
                 .andExpect(model().attribute("plotpath", "ploturl"));
 
-        verify(contractLogPlot,times(1)).createChart("Data of the last 7 days since 2022-12-02");
-        verify(contractLogPlot,times(1)).saveAsJpgServlet(any());
-        verify(contractLogPlot,times(1)).addContractLogsByLabel(contractLogWeekService,LocalDate.parse("2022-12-02"),"liberal","conservative");
+        verify(contractLogPlot, times(1)).createChart("Data of the last 7 days since 2022-12-02");
+        verify(contractLogPlot, times(1)).saveAsJpgServlet(any());
+        verify(contractLogPlot, times(1)).addContractLogsByLabel(contractLogWeekService, LocalDate.parse("2022-12-02"), "liberal", "conservative");
     }
 
     @MockBean
@@ -67,23 +67,23 @@ class PlotControllerTests {
 
     @Test
     @WithMockUser
-    void showDayPlot() throws Exception {
+    void givenDate_whenPostPlotDay_thenDayPlotViewWithChartReturned() throws Exception {
         when(contractLogPlot.saveAsJpgServlet(any())).thenReturn("ploturl");
         this.mockMvc
                 .perform(post("/plot/day").with(csrf())
-                        .param("date","2022-12-02"))
+                        .param("date", "2022-12-02"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("dayplot"))
                 .andExpect(model().attribute("plotpath", "ploturl"));
 
-        verify(contractLogPlot,times(1)).createChart("Data for the date 2022-12-02");
-        verify(contractLogPlot,times(1)).saveAsJpgServlet(any());
-        verify(contractLogPlot,times(1)).addContractLogsByLabel(contractLogDayService,LocalDate.parse("2022-12-02"),"liberal","conservative");
+        verify(contractLogPlot, times(1)).createChart("Data for the date 2022-12-02");
+        verify(contractLogPlot, times(1)).saveAsJpgServlet(any());
+        verify(contractLogPlot, times(1)).addContractLogsByLabel(contractLogDayService, LocalDate.parse("2022-12-02"), "liberal", "conservative");
     }
 
     @Test
     @WithMockUser
-    void showPlotHome() throws Exception {
+    void givenAuthenticatedUser_whenGetPlot_thenPlothomeView() throws Exception {
         this.mockMvc
                 .perform(get("/plot").with(csrf()))
                 .andExpect(status().isOk())
@@ -91,7 +91,7 @@ class PlotControllerTests {
     }
 
     @Test
-    public void getPlotPageWithoutLogin() throws Exception {
+    public void givenUnauthenticatedAcess_whenGetPlot_thenRedirectLoginView() throws Exception {
         ResultActions result = this.mockMvc.perform(MockMvcRequestBuilders.get("/plot"))
                 .andExpect(status().is3xxRedirection());
         assertThat(result.andReturn().getResponse().getHeader("Location")).isEqualTo("http://localhost/login");
