@@ -74,7 +74,7 @@ public class PlotController {
      */
     @GetMapping()
     public String showPlotHome(Model model){
-        model.addAttribute("localDate", LocalDate.now());
+        model.addAttribute("localDate", LocalDate.now().toString());
         return "plothome";
     }
 

@@ -13,7 +13,7 @@
                 <img th:src="${plotpath}"   />
 
             </div>
-<form method="post" th:action="@{/plot/week(date=${#temporals.format(localDate, 'yyyy-MM-DD')})}" >
+<form method="post" th:action="@{/plot/day(date=${#temporals.format(localDate, 'yyyy-MM-DD')})}" >
     <button type="submit" name="submit" value="value" class="link-button">Week Data</button>
 </form>
 </div>
