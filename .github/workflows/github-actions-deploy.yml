@@ -2,7 +2,7 @@ name: deploy
 on: [workflow_dispatch]
 jobs:
   deploy:
-    runs-on: gc-hosted
+    runs-on: self-hosted
     env:
       SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
       SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
@@ -16,6 +16,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Clean instance from docker images
+        run: |
+          - docker kill $(docker ps -q)
+          - docker system prune --volumes -f
       - name: Update image
         run: docker-compose pull
       - name: Bring containers up
