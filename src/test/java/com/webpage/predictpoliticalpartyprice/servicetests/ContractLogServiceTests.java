@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -35,14 +36,14 @@ public class ContractLogServiceTests {
     static Stream<Arguments> generateDayTestData() {
         return Stream.of(
                 Arguments.of("conservative",LocalDate.parse("2021-12-02"), Arrays.asList(
-                        new ContractLog(0.2, Instant.parse("2021-12-03T00:50:00.000000Z")),
-                        new ContractLog(0.4, Instant.parse("2021-12-03T00:40:00.00000Z")),
-                        new ContractLog(0.8, Instant.parse("2021-12-03T01:00:00.00000Z"))
+                        new ContractLog(0.2, LocalDateTime.parse("2021-12-03T00:50:00.000000")),
+                        new ContractLog(0.4, LocalDateTime.parse("2021-12-03T00:40:00.00000")),
+                        new ContractLog(0.8, LocalDateTime.parse("2021-12-03T01:00:00.00000"))
                         )),
                 Arguments.of("liberal", LocalDate.parse("2021-12-03"), Arrays.asList(
-                        new ContractLog(0.4, Instant.parse("2021-12-04T02:50:00.00000Z")),
-                        new ContractLog(0.4, Instant.parse("2021-12-04T02:40:00.00000Z")),
-                        new ContractLog(0.6, Instant.parse("2021-12-04T03:00:00.00000Z"))
+                        new ContractLog(0.4, LocalDateTime.parse("2021-12-04T02:50:00.00000")),
+                        new ContractLog(0.4, LocalDateTime.parse("2021-12-04T02:40:00.00000")),
+                        new ContractLog(0.6, LocalDateTime.parse("2021-12-04T03:00:00.00000"))
                 ))
         );
     }
@@ -63,14 +64,14 @@ public class ContractLogServiceTests {
     static Stream<Arguments> generateWeekTestData() {
         return Stream.of(
                 Arguments.of("conservative", LocalDate.parse("2021-12-03"), Arrays.asList(
-                        new ContractLog(0.2, Instant.parse("2021-11-30T00:00:00Z")),
-                        new ContractLog(0.75, Instant.parse("2021-12-01T00:00:00Z")),
-                        new ContractLog(0.38333333333333336, Instant.parse("2021-12-03T00:00:00Z"))
+                        new ContractLog(0.2, LocalDateTime.parse("2021-11-30T00:00:00")),
+                        new ContractLog(1.5, LocalDateTime.parse("2021-12-01T00:00:00")),
+                        new ContractLog(2.3, LocalDateTime.parse("2021-12-03T00:00:00"))
                 )),
                 Arguments.of("liberal", LocalDate.parse("2021-12-04"), Arrays.asList(
-                        new ContractLog(0.15, Instant.parse("2021-11-30T00:00:00Z")),
-                        new ContractLog(0.3, Instant.parse("2021-12-02T00:00:00Z")),
-                        new ContractLog(0.4, Instant.parse("2021-12-04T00:00:00Z"))
+                        new ContractLog(0.3, LocalDateTime.parse("2021-11-30T00:00:00")),
+                        new ContractLog(0.3, LocalDateTime.parse("2021-12-02T00:00:00")),
+                        new ContractLog(2.4, LocalDateTime.parse("2021-12-04T00:00:00"))
                 ))
         );
     }

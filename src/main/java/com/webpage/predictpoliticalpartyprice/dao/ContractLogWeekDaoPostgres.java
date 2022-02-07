@@ -25,7 +25,7 @@ public class ContractLogWeekDaoPostgres implements ContractLogWeekDao {
     public List<ContractLog> getListOfContractLogs(LocalDate date, String Label) {
 
         final String sqlStatement = "" +
-                "SELECT AVG(\"contract_log\".\"last_trade_price\"), DATE((\"contract_log\".\"time_stamp\" at time zone  'EST') at time zone 'Europe/Berlin')  AS day " +
+                "SELECT SUM(\"contract_log\".\"last_trade_price\"), DATE((\"contract_log\".\"time_stamp\" at time zone  'EST') at time zone 'Europe/Berlin')  AS day " +
                 "FROM contract_log " +
                 "INNER JOIN contractdata ON \"contract_log\".\"candidate_id\" = \"contractdata\".\"candidateId\" " +
                 "WHERE (\"contractdata\".\"label\" = '" + Label + "') AND  (\"contract_log\".\"time_stamp\" at time zone  'EST') at time zone 'Europe/Berlin'  BETWEEN ('" + date + "'::date- INTERVAL '6 days') AND ('" + date + "'::date+ INTERVAL '1 day')" +

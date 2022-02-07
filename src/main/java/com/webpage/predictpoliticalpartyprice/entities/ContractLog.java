@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.data.jdbc.core.convert.Jsr310TimestampBasedConverters;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 /**
  * ContractLog oject represents the average of contractdata over the given timestamp with the same label
@@ -13,7 +14,7 @@ public class ContractLog {
 
     @Getter
     @Setter
-    Instant timestamp;
+    LocalDateTime timestamp;
 
     @Getter
     @Setter
@@ -21,7 +22,7 @@ public class ContractLog {
 
     public ContractLog(){}
 
-    public ContractLog(Double tradePrice, Instant timestamp){
+    public ContractLog(Double tradePrice, LocalDateTime timestamp){
         setTradePrice(tradePrice);
         setTimestamp(timestamp);
     }

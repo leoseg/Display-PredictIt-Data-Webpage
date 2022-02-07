@@ -16,6 +16,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -38,7 +39,16 @@ public class ContractLogPlot {
 
         //Timeseries is adding one hours to each timestamp so it needs to be subtracted (coming from the calendartime)
         for(ContractLog contractLog: contractLogList){
-            timeSeries.add(new Millisecond(Date.from(contractLog.getTimestamp())),contractLog.getTradePrice());//.minus(1, ChronoUnit.HOURS))),contractLog.getTradePrice());
+            LocalDateTime localDateTime = contractLog.getTimestamp();
+            Millisecond millisecond = new Millisecond(
+                    0,
+                    localDateTime.getSecond(),
+                    localDateTime.getMinute(),
+                    localDateTime.getHour(),
+                    localDateTime.getDayOfMonth(),
+                    localDateTime.getMonthValue(),
+                    localDateTime.getYear());
+            timeSeries.add(millisecond,contractLog.getTradePrice());//.minus(1, ChronoUnit.HOURS))),contractLog.getTradePrice());
         }
         timeSeriesCollection.addSeries(timeSeries);
     }

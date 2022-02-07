@@ -26,7 +26,7 @@ public class ContractLogDayDaoPostgres implements ContractLogDayDao {
     public List<ContractLog> getListOfContractLogs(LocalDate date, String Label) {
 
         final String sqlStatement= "" +
-                "SELECT AVG(\"contract_log\".\"last_trade_price\"), " +
+                "SELECT SUM(\"contract_log\".\"last_trade_price\"), " +
                 "(to_timestamp(round((extract('epoch' from (\"contract_log\".\"time_stamp\"  at time zone 'EST') at time zone 'Europe/Berlin')/ 600)) * 600)) as timestamp "+
                 "FROM contract_log " +
                 "INNER JOIN contractdata ON \"contract_log\".\"candidate_id\" = \"contractdata\".\"candidateId\"" +
