@@ -6,6 +6,8 @@ import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -20,20 +22,11 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class ContractLogPlotTests {
 
-    @Resource
-    ContractLogPlot contractLogPlot;
 
-    @MockBean
-    @Qualifier("week")
-    ContractLogService contractLogService;
 
     List<ContractLog> contractLogList;
     List<ContractLog> contractLogList2;
@@ -49,6 +42,8 @@ public class ContractLogPlotTests {
     @Test
     public void givenContraglogLists_whenContragLogPlotCreateChartAndSaveAsJpg_thenUrlShouldMatchPattern() throws IOException {
         MockHttpServletRequest request = new MockHttpServletRequest();
+        ContractLogPlot contractLogPlot = new ContractLogPlot();
+        ContractLogService contractLogService = Mockito.mock(ContractLogService.class);
         when(contractLogService.getContractLogsByLabel("label1",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList);
         when(contractLogService.getContractLogsByLabel("label2",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList2);
         contractLogPlot.addContractLogsByLabel(contractLogService, LocalDate.parse("2021-12-03"),"label1","label2");

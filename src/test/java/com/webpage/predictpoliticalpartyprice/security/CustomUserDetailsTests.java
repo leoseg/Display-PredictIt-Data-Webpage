@@ -2,10 +2,9 @@ package com.webpage.predictpoliticalpartyprice.security;
 import static org.junit.Assert.*;
 import com.webpage.predictpoliticalpartyprice.entities.User;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+
 public class CustomUserDetailsTests {
 
     @Test
