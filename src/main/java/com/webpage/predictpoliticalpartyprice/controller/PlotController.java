@@ -1,7 +1,8 @@
 package com.webpage.predictpoliticalpartyprice.controller;
 
+import com.webpage.predictpoliticalpartyprice.dao.ContractDataRepository;
 import com.webpage.predictpoliticalpartyprice.entities.PlotInfo;
-import com.webpage.predictpoliticalpartyprice.plotclasses.ContractLogPlot;
+import com.webpage.predictpoliticalpartyprice.plotclasses.LogPlot;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
 import org.jfree.chart.servlet.DisplayChart;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,7 +36,10 @@ public class PlotController {
     ContractLogService contractLogWeekService;
 
     @Resource
-    ContractLogPlot contractLogPlot;
+    ContractDataRepository contractDataRepository;
+
+    @Resource
+    LogPlot logPlot;
     /**
      * Registrates the Servlet for displaying the chart at the website
      * @return new registration bean
@@ -50,10 +54,10 @@ public class PlotController {
     @PostMapping(value="/week")
     public String showWeekPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
-        contractLogPlot.addContractLogsByLabel(contractLogWeekService,date,"liberal","conservative");
-        contractLogPlot.createChart("Data of the last 7 days since "+date);
-        model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
-        model.addAttribute("localDate", LocalDate.now());
+        logPlot.addContractLogs(contractLogWeekService,date,"PoliticalLabel","liberal","conservative");
+        logPlot.createChart("Data of the last 7 days since "+date);
+        model.addAttribute("plotpath", logPlot.saveAsJpgServlet(request));
+        model.addAttribute("localDate", LocalDate.now().toString());
         return "weekplot";
     }
 
@@ -63,18 +67,36 @@ public class PlotController {
     @PostMapping(value="/day")
     public String showDayPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
-        contractLogPlot.addContractLogsByLabel(contractLogDayService,date,"liberal","conservative");
-        contractLogPlot.createChart("Data for the date "+date);
-        model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
-        model.addAttribute("localDate", LocalDate.now());
+        logPlot.addContractLogs(contractLogDayService,date,"PoliticalLabel","liberal","conservative");
+        logPlot.createChart("Data for the date "+date);
+        model.addAttribute("plotpath", logPlot.saveAsJpgServlet(request));
+        model.addAttribute("localDate", LocalDate.now().toString());
         return "dayplot";
+    }
+
+    /*
+    Creates and shows plot of different candidates
+    */
+    @PostMapping(value="/candidates")
+    public String showCandidatesPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
+        LocalDate date = LocalDate.parse(plotInfo.getDate());
+        String[] candidateNames = plotInfo.getPresidentNames().toArray(new String[0]);
+        logPlot.addContractLogs(contractLogDayService,date,"Name",candidateNames);
+        logPlot.createChart("Data for the date "+date);
+        model.addAttribute("plotpathday", logPlot.saveAsJpgServlet(request));
+        logPlot.addContractLogs(contractLogWeekService,date,"Name",candidateNames);
+        logPlot.createChart("Data of the last 7 days since "+date);
+        model.addAttribute("plotpathweek", logPlot.saveAsJpgServlet(request));
+        return "candidatesplot";
     }
     /*
     Shows the homepage of plots, with one button leading to the dayplot and one to the weekplot
      */
     @GetMapping()
     public String showPlotHome(Model model){
+        model.addAttribute("candidateNames",contractDataRepository.getContractDataOfPresidentsElections());
         model.addAttribute("localDate", LocalDate.now().toString());
+        model.addAttribute("plotInfo",new PlotInfo());
         return "plothome";
     }
 

@@ -20,13 +20,14 @@ public class ContractLogWeekService implements ContractLogService{
     ContractLogWeekDao contractLogWeekDao;
 
     /**
-     * Gets contract log list with same label grouped by the day
+     * Gets contract log list with same label define grouped by the day
      * @param label label of contratlogs
-     * @param date date for getting the data
+     * @param attribute to choose contractlogs by
+     * @param date last date of the 7 days
      * @return  list of contractlog object
      */
     @Override
-    public List<ContractLog> getContractLogsByLabel(String label, LocalDate date) {
-        return contractLogWeekDao.getListOfContractLogs(date,label);
+    public List<ContractLog> getContractLogs(String label, String attribute, LocalDate date) {
+        return contractLogWeekDao.getListOfContractLogs(date,label,attribute);
     }
 }

@@ -15,7 +15,7 @@ CREATE TABLE contract_log(
     "bestBuyNoCost" DOUBLE PRECISION
 );
 
-INSERT INTO contractdata ("label","candidateId","name","marketId","marketName") VALUES
+INSERT INTO contractdata ("label",candidateid,"name",marketid,marketname) VALUES
         ('liberal',28839,'Draghi',7663,'president-italia'),
         ('conservative',28836,'Berlusconi',7663,'president-italia'),
         ('liberal',26820,'Macron',7360,'president-france'),

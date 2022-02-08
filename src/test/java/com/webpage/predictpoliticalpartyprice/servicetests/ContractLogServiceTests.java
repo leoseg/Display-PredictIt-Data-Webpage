@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 
 import javax.annotation.Resource;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -51,10 +50,10 @@ public class ContractLogServiceTests {
     @ParameterizedTest
     @MethodSource("generateDayTestData")
     void givenLabelDate_whenContractLogDayServiceGetsContractLogsByLabel_thenActualShouldBeEqualExspected(String label, LocalDate date, List<ContractLog> exspected) {
-        List<ContractLog> actual = contractLogDayService.getContractLogsByLabel(label,date);
+        List<ContractLog> actual = contractLogDayService.getContractLogs(label,"PoliticalLabel",date);
         int i =0;
         for (ContractLog contractLog : actual) {
-            Assertions.assertEquals(contractLog.getTradePrice(), exspected.get(i).getTradePrice(), 0.0001);
+            Assertions.assertEquals(contractLog.getLogvalue(), exspected.get(i).getLogvalue(), 0.0001);
             assert(contractLog.getTimestamp().equals(exspected.get(i).getTimestamp()));
             i++;
         }
@@ -79,10 +78,10 @@ public class ContractLogServiceTests {
     @ParameterizedTest
     @MethodSource("generateWeekTestData")
     void givenLabelDate_whenContractLogWeekServiceGetsContractLogsByLabel_thenActualShouldBeEqualExspected(String label, LocalDate date,List<ContractLog> exspected){
-        List<ContractLog>result = contractLogWeekService.getContractLogsByLabel(label,date);
+        List<ContractLog>result = contractLogWeekService.getContractLogs(label,"PoliticalLabel",date);
         int i =0;
         for (ContractLog contractLog : result) {
-            Assertions.assertEquals(contractLog.getTradePrice(), exspected.get(i).getTradePrice(), 0.0001);
+            Assertions.assertEquals(contractLog.getLogvalue(), exspected.get(i).getLogvalue(), 0.0001);
             assert(contractLog.getTimestamp().equals(exspected.get(i).getTimestamp()));
             i++;
         }

@@ -5,7 +5,8 @@ Webapplication project which displays the data collected by my other project Pre
 
 ## Data displayed
 
-I took 5 different bets from predictit and labeled their contract outcomes by a liberal or conservative political direction. For example Victor Orban reelected is labeled as conservative. 
+I took 5 different bets from predictit and labeled their contract outcomes by a liberal or conservative political direction. For example the contract
+Victor Orban reelected for president in hungaria is labeled as conservative. 
 
 There are two plots, in both plots the data is grouped by their sum of tradeprice and their timestamps.
 

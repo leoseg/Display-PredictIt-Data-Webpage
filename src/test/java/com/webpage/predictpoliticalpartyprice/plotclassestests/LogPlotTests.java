@@ -1,21 +1,13 @@
 package com.webpage.predictpoliticalpartyprice.plotclassestests;
 
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
-import com.webpage.predictpoliticalpartyprice.plotclasses.ContractLogPlot;
+import com.webpage.predictpoliticalpartyprice.plotclasses.LogPlot;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.mock.web.MockHttpServletRequest;
-
-import javax.annotation.Resource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
@@ -24,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import static org.mockito.Mockito.when;
 
-public class ContractLogPlotTests {
+public class LogPlotTests {
 
 
 
@@ -42,13 +34,13 @@ public class ContractLogPlotTests {
     @Test
     public void givenContraglogLists_whenContragLogPlotCreateChartAndSaveAsJpg_thenUrlShouldMatchPattern() throws IOException {
         MockHttpServletRequest request = new MockHttpServletRequest();
-        ContractLogPlot contractLogPlot = new ContractLogPlot();
+        LogPlot logPlot = new LogPlot();
         ContractLogService contractLogService = Mockito.mock(ContractLogService.class);
-        when(contractLogService.getContractLogsByLabel("label1",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList);
-        when(contractLogService.getContractLogsByLabel("label2",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList2);
-        contractLogPlot.addContractLogsByLabel(contractLogService, LocalDate.parse("2021-12-03"),"label1","label2");
-        contractLogPlot.createChart(("testchart"));
-        String actual = contractLogPlot.saveAsJpgServlet(request);
+        when(contractLogService.getContractLogs("label1","PoliticalLabel",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList);
+        when(contractLogService.getContractLogs("label2","PoliticalLabel",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList2);
+        logPlot.addContractLogs(contractLogService, LocalDate.parse("2021-12-03"),"label1","label2");
+        logPlot.createChart(("testchart"));
+        String actual = logPlot.saveAsJpgServlet(request);
         assertThat(actual).matches("^/chart.*jpeg$");
     }
 }

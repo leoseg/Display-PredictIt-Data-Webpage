@@ -2,7 +2,7 @@ package com.webpage.predictpoliticalpartyprice.controllertests;
 
 import com.webpage.predictpoliticalpartyprice.controller.PlotController;
 import com.webpage.predictpoliticalpartyprice.dao.UserRepository;
-import com.webpage.predictpoliticalpartyprice.plotclasses.ContractLogPlot;
+import com.webpage.predictpoliticalpartyprice.plotclasses.LogPlot;
 import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,13 +40,13 @@ class PlotControllerTests {
     ContractLogService contractLogDayService;
 
     @MockBean
-    ContractLogPlot contractLogPlot;
+    LogPlot logPlot;
 
 
     @Test
     @WithMockUser
     void givenDate_whenPostPlotWeek_thenWeekPlotViewWithChartReturned() throws Exception {
-        when(contractLogPlot.saveAsJpgServlet(any())).thenReturn("ploturl");
+        when(logPlot.saveAsJpgServlet(any())).thenReturn("ploturl");
         this.mockMvc
                 .perform(post("/plot/week").with(csrf())
                         .param("date", "2022-12-02"))
@@ -54,9 +54,9 @@ class PlotControllerTests {
                 .andExpect(view().name("weekplot"))
                 .andExpect(model().attribute("plotpath", "ploturl"));
 
-        verify(contractLogPlot, times(1)).createChart("Data of the last 7 days since 2022-12-02");
-        verify(contractLogPlot, times(1)).saveAsJpgServlet(any());
-        verify(contractLogPlot, times(1)).addContractLogsByLabel(contractLogWeekService, LocalDate.parse("2022-12-02"), "liberal", "conservative");
+        verify(logPlot, times(1)).createChart("Data of the last 7 days since 2022-12-02");
+        verify(logPlot, times(1)).saveAsJpgServlet(any());
+        verify(logPlot, times(1)).addContractLogs(contractLogWeekService, LocalDate.parse("2022-12-02"), "liberal", "conservative");
     }
 
     @MockBean
@@ -68,7 +68,7 @@ class PlotControllerTests {
     @Test
     @WithMockUser
     void givenDate_whenPostPlotDay_thenDayPlotViewWithChartReturned() throws Exception {
-        when(contractLogPlot.saveAsJpgServlet(any())).thenReturn("ploturl");
+        when(logPlot.saveAsJpgServlet(any())).thenReturn("ploturl");
         this.mockMvc
                 .perform(post("/plot/day").with(csrf())
                         .param("date", "2022-12-02"))
@@ -76,9 +76,9 @@ class PlotControllerTests {
                 .andExpect(view().name("dayplot"))
                 .andExpect(model().attribute("plotpath", "ploturl"));
 
-        verify(contractLogPlot, times(1)).createChart("Data for the date 2022-12-02");
-        verify(contractLogPlot, times(1)).saveAsJpgServlet(any());
-        verify(contractLogPlot, times(1)).addContractLogsByLabel(contractLogDayService, LocalDate.parse("2022-12-02"), "liberal", "conservative");
+        verify(logPlot, times(1)).createChart("Data for the date 2022-12-02");
+        verify(logPlot, times(1)).saveAsJpgServlet(any());
+        verify(logPlot, times(1)).addContractLogs(contractLogDayService, LocalDate.parse("2022-12-02"), "liberal", "conservative");
     }
 
     @Test

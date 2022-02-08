@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.List;
  * Class for plotting the contractlogs over time
  */
 @Service
-public class ContractLogPlot {
+public class LogPlot {
 
     TimeSeriesCollection timeSeriesCollection;
     JFreeChart chart;
@@ -48,9 +47,16 @@ public class ContractLogPlot {
                     localDateTime.getDayOfMonth(),
                     localDateTime.getMonthValue(),
                     localDateTime.getYear());
-            timeSeries.add(millisecond,contractLog.getTradePrice());//.minus(1, ChronoUnit.HOURS))),contractLog.getTradePrice());
+            timeSeries.add(millisecond,contractLog.getLogvalue());
         }
         timeSeriesCollection.addSeries(timeSeries);
+    }
+
+    /**
+     * Initialize a new timeseriescollection for one plot
+     */
+    public void initializeTimeSeriesCollection(){
+        this.timeSeriesCollection = new TimeSeriesCollection();
     }
 
     /**
@@ -60,6 +66,7 @@ public class ContractLogPlot {
     public void createChart(String title){
         chart = ChartFactory.createTimeSeriesChart(title,"Time","Tradeprice",timeSeriesCollection);
         chart.getPlot().setBackgroundPaint( Color.WHITE );
+
     }
 
     /**
@@ -77,12 +84,12 @@ public class ContractLogPlot {
      * Adds multiple contractloglists with given labels at the given date to the timeseriesdataset
      * @param contractLogService service for getting the contractlog data (can be week or day)
      * @param date date for getting the data from
+     * @param attribute attribute to add contracts by
      * @param labels for each label a list of contractlogs is added
      */
-    public void addContractLogsByLabel(ContractLogService contractLogService, LocalDate date, String... labels){
-        this.timeSeriesCollection = new TimeSeriesCollection();
+    public void addContractLogs(ContractLogService contractLogService, LocalDate date, String attribute, String... labels){
         for(String label: labels){
-            addContractLogs(contractLogService.getContractLogsByLabel(label,date),label);
+            addContractLogs(contractLogService.getContractLogs(label,attribute,date),label);
         }
     }
 

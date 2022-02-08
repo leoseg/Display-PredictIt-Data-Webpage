@@ -13,7 +13,18 @@ img {
 body {
     background-color: lightblue;
 }
+.form-dropdown {
+    -webkit-appearance: listbox !important;
+}
 
+select{
+    width: 150px;
+    margin:10px;
+}
+select:focus {
+    min-width: 150px;
+    width: auto;
+}
 input{
     padding: 10px;
 }
@@ -23,6 +34,7 @@ button {
     font-family: "Noto Sans CJK SC";
     background: rgb(245, 255, 255);;
     padding: 10px;
+    margin:10px;
     border-radius: 20px;
     display: inline-block;
     border: none;

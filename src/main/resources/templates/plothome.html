@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -8,15 +8,38 @@
 <body>
 <h1>Predict Political Party Price</h1>
 <div class="all-classes-container">
-<h3>Get data of the week:</h3>
+<h3>Plot data of the week by political directions:</h3>
 <form method="post" th:action="@{/plot/week(date=${localDate})}">
-    <button type="submit" name="submit" value="value" class="link-button">Week Data</button>
+    <button type="submit" name="submit" value="value" class="link-button">Week Plot</button>
 </form>
-<h3>Get data of the day:</h3>
+<h3>Plot data of the day by political directions:</h3>
 <form method="post" th:action="@{/plot/day(date=${localDate})}">
-    <button type="submit" name="submit" value="value" class="link-button">Day Data</button>
+    <button type="submit" name="submit" value="value" class="link-button">Day Plot</button>
 </form>
+
 </div>
+<form method="post" th:action="@{/plot/candidates(date=${localDate})}" th:object="${plotInfo}">
+<h3>Plot data of different candidates:</h3>
+    <div class="row">
+<label for="candidateNames">Select Candidates</label>
+    </div>
+    <div class="row">
+<select class="selectpicker" multiple="multiple" th:field="*{presidentNames}"  id="candidateNames" size="10">
+
+    <option th:each="candidate : ${candidateNames}"
+            th:value="${candidate.getName}"
+            th:text="${candidate.getName}">
+    </option>
+
+</select>
+    </div>
+    <div class="all-classes-container">
+        <button type="submit" name="submit" value="value" class="link-button">Candidate Plot</button>
+        </div>
+    </div>
+</form>
+
+
 
 
 </body>
