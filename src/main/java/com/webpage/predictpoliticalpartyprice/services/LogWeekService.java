@@ -13,7 +13,7 @@ import java.util.List;
  * Gets list of contract logs of the last 7 days
  */
 @Service(value="week")
-public class ContractLogWeekService implements ContractLogService{
+public class LogWeekService implements LogService {
 
     @Resource
     @Qualifier("weekdao")

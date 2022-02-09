@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Service for accessing the contractlog data
  */
-public interface ContractLogService {
+public interface LogService {
 
     /**
      * Gets a list of contractlogs with the same label

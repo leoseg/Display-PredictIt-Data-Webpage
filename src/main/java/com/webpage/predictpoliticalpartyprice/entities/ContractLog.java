@@ -9,15 +9,17 @@ import java.time.LocalDateTime;
  * ContractLog oject represents the average of contractdata over the given timestamp with the same label
  * a Contract is a bet on a presidentcandidate
  */
-public class ContractLog {
+public class ContractLog extends Log{
 
-    @Getter
+
     @Setter
+    @Getter
     LocalDateTime timestamp;
 
-    @Getter
+
     @Setter
-    Double logvalue;
+    @Getter
+    double logvalue;
 
     public ContractLog(){}
 

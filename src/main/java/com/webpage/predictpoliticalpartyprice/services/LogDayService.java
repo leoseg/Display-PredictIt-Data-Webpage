@@ -10,7 +10,7 @@ import java.util.List;
  * Gets list of contractlogs for the given date
  */
 @Service(value="day")
-public class ContractLogDayService implements ContractLogService{
+public class LogDayService implements LogService {
 
 
     @Resource

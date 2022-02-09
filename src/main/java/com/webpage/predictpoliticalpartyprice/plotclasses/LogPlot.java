@@ -1,7 +1,8 @@
 package com.webpage.predictpoliticalpartyprice.plotclasses;
 
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
-import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
+import com.webpage.predictpoliticalpartyprice.entities.Log;
+import com.webpage.predictpoliticalpartyprice.services.LogService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.servlet.ServletUtilities;
@@ -30,15 +31,15 @@ public class LogPlot {
 
     /**
      * Adds a list of contractlogs as timeseries to the timeseriesdataset
-     * @param contractLogList list to ad
+     * @param LogList list to ad
      * @param label label of the timeseries
      */
-    private void addContractLogs(List<ContractLog> contractLogList, String label){
+    private void addContractLogs(List<? extends Log> LogList, String label){
         TimeSeries timeSeries = new TimeSeries(label);
 
         //Timeseries is adding one hours to each timestamp so it needs to be subtracted (coming from the calendartime)
-        for(ContractLog contractLog: contractLogList){
-            LocalDateTime localDateTime = contractLog.getTimestamp();
+        for(Log Log: LogList){
+            LocalDateTime localDateTime = Log.getTimestamp();
             Millisecond millisecond = new Millisecond(
                     0,
                     localDateTime.getSecond(),
@@ -47,7 +48,7 @@ public class LogPlot {
                     localDateTime.getDayOfMonth(),
                     localDateTime.getMonthValue(),
                     localDateTime.getYear());
-            timeSeries.add(millisecond,contractLog.getLogvalue());
+            timeSeries.add(millisecond,Log.getLogvalue());
         }
         timeSeriesCollection.addSeries(timeSeries);
     }
@@ -82,14 +83,14 @@ public class LogPlot {
 
     /**
      * Adds multiple contractloglists with given labels at the given date to the timeseriesdataset
-     * @param contractLogService service for getting the contractlog data (can be week or day)
+     * @param logService service for getting the contractlog data (can be week or day)
      * @param date date for getting the data from
      * @param attribute attribute to add contracts by
      * @param labels for each label a list of contractlogs is added
      */
-    public void addContractLogs(ContractLogService contractLogService, LocalDate date, String attribute, String... labels){
+    public void addContractLogs(LogService logService, LocalDate date, String attribute, String... labels){
         for(String label: labels){
-            addContractLogs(contractLogService.getContractLogs(label,attribute,date),label);
+            addContractLogs(logService.getContractLogs(label,attribute,date),label);
         }
     }
 
