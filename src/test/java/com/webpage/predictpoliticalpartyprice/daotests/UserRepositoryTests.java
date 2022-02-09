@@ -18,10 +18,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserRepositoryTests {
 
     @Resource
-    private TestEntityManager entityManager;
+    TestEntityManager entityManager;
 
     @Resource
-    private UserRepository repo;
+    UserRepository repo;
 
     @Test
     public void givenUser_whenRepoSaveUser_thenEntityManagerFindUserShouldFindUser(){

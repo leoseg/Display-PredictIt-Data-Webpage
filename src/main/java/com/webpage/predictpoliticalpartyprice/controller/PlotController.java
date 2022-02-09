@@ -60,7 +60,7 @@ public class PlotController {
     public String showDayPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
         plotCreator.setPlotProperties("day","PoliticalLabel","contract");
-        model.addAttribute("plotpath", plotCreator.createPlot(date,request,"Data of the last 7 days since "+date,"liberal","conservative"));
+        model.addAttribute("plotpath", plotCreator.createPlot(date,request,"Data for the date "+date,"liberal","conservative"));
         model.addAttribute("localDate", LocalDate.now().toString());
         return "dayplot";
     }

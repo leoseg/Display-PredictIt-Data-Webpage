@@ -2,7 +2,7 @@ package com.webpage.predictpoliticalpartyprice.plotclassestests;
 
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
 import com.webpage.predictpoliticalpartyprice.plotclasses.LogPlot;
-import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
+import com.webpage.predictpoliticalpartyprice.services.LogService;
 import org.jeasy.random.EasyRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,10 +35,11 @@ public class LogPlotTests {
     public void givenContraglogLists_whenContragLogPlotCreateChartAndSaveAsJpg_thenUrlShouldMatchPattern() throws IOException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         LogPlot logPlot = new LogPlot();
-        ContractLogService contractLogService = Mockito.mock(ContractLogService.class);
-        when(contractLogService.getContractLogs("label1","PoliticalLabel",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList);
-        when(contractLogService.getContractLogs("label2","PoliticalLabel",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList2);
-        logPlot.addContractLogs(contractLogService, LocalDate.parse("2021-12-03"),"label1","label2");
+        LogService logService = Mockito.mock(LogService.class);
+        logPlot.initializeTimeSeriesCollection();
+        when(logService.getContractLogs("label1","PoliticalLabel",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList);
+        when(logService.getContractLogs("label2","PoliticalLabel",LocalDate.parse("2021-12-03"))).thenReturn(contractLogList2);
+        logPlot.addContractLogs(logService, LocalDate.parse("2021-12-03"),"PoliticalLabel","label1","label2");
         logPlot.createChart(("testchart"));
         String actual = logPlot.saveAsJpgServlet(request);
         assertThat(actual).matches("^/chart.*jpeg$");
