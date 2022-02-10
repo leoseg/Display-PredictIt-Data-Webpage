@@ -34,10 +34,10 @@ public class ContractLogDayDaoPostgres implements ContractLogDayDao {
         String columName = attributeColumNameMap.get(attribute);
         final String sqlStatement= "" +
                 "SELECT SUM(\"contract_log\".\"last_trade_price\"), " +
-                "(to_timestamp(round((extract('epoch' from (\"contract_log\".\"time_stamp\"  at time zone 'EST') at time zone 'Europe/Berlin')/ 600)) * 600)) as timestamp "+
+                "(to_timestamp(round((extract('epoch' from (\"contract_log\".\"time_stamp\"  at time zone 'EST') )/ 600)) * 600)) as timestamp "+
                 "FROM contract_log " +
                 "INNER JOIN contractdata ON \"contract_log\".\"candidate_id\" = \"contractdata\".candidateid" +
-                " WHERE ("+String.format("contractdata.%s",columName)+"= '" +label + "') AND  DATE((\"contract_log\".\"time_stamp\" at time zone  'EST') at time zone 'Europe/Berlin') = '"+date+"' "+
+                " WHERE ("+String.format("contractdata.%s",columName)+"= '" +label + "') AND  DATE(\"contract_log\".\"time_stamp\" at time zone  'EST')  = '"+date+"' "+
                 "GROUP BY timestamp";
 
         return jdbcTemplate.query(sqlStatement, this.contractLogRowMapper);

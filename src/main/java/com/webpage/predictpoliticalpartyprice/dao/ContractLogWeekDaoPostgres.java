@@ -33,10 +33,10 @@ public class ContractLogWeekDaoPostgres implements ContractLogWeekDao {
     public List<ContractLog> getListOfContractLogs(LocalDate date, String label, String attribute) {
         String columName = attributeColumNameMap.get(attribute);
         final String sqlStatement = "" +
-                "SELECT SUM(\"contract_log\".\"last_trade_price\"), DATE((\"contract_log\".\"time_stamp\" at time zone  'EST') at time zone 'Europe/Berlin')  AS day " +
+                "SELECT SUM(\"contract_log\".\"last_trade_price\"), DATE(\"contract_log\".\"time_stamp\" at time zone  'EST') AS day " +
                 "FROM contract_log " +
                 "INNER JOIN contractdata ON \"contract_log\".\"candidate_id\" = \"contractdata\".candidateid " +
-                "WHERE ("+String.format("contractdata.%s",columName)+"= '" +label + "') AND  (\"contract_log\".\"time_stamp\" at time zone  'EST') at time zone 'Europe/Berlin'  BETWEEN ('" + date + "'::date- INTERVAL '6 days') AND ('" + date + "'::date+ INTERVAL '1 day')" +
+                "WHERE ("+String.format("contractdata.%s",columName)+"= '" +label + "') AND  (\"contract_log\".\"time_stamp\" at time zone  'EST')   BETWEEN ('" + date + "'::date- INTERVAL '6 days') AND ('" + date + "'::date+ INTERVAL '1 day')" +
                 "GROUP BY day";
 
         return jdbcTemplate.query(sqlStatement, this.contractLogRowMapper);

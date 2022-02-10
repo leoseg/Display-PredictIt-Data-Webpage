@@ -74,7 +74,7 @@ public class PlotController {
         String[] candidateNames = plotInfo.getPresidentNames().toArray(new String[0]);
         plotCreator.setPlotProperties("day","Name","contract");
         model.addAttribute("plotpathday", plotCreator.createPlot(date,request,"Data for the date "+date,candidateNames));
-        plotCreator.setPlotProperties("day","Name","contract");
+        plotCreator.setPlotProperties("week","Name","contract");
         model.addAttribute("plotpathweek", plotCreator.createPlot(date,request,"Data of the last 7 days since "+date,candidateNames));
         return "candidatesplot";
     }

@@ -85,14 +85,14 @@ class PlotControllerTests {
     @WithMockUser
     void givenAuthenticatedUser_whenGetPlot_thenPlothomeView() throws Exception {
 
-        when(contractDataRepository.findAll()).thenReturn(Arrays.asList(new ContractData(),new ContractData()));
         this.mockMvc
                 .perform(get("/plot").with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("plothome"))
                 .andExpect(model().attributeExists("plotInfo"))
                 .andExpect(model().attribute("localDate",LocalDate.now().toString()))
-                .andExpect(model().attribute("candidateNames",Arrays.asList(new ContractData(),new ContractData())));
+                .andExpect(model().attributeExists("candidateNames"));
+        verify(contractDataRepository,times(1)).findAll();
     }
 
     @Test
@@ -106,17 +106,18 @@ class PlotControllerTests {
     @WithMockUser
     void givenDate_whenPostPlotCandidates_thenCandidatesPlotViewReturned() throws Exception {
         when(plotCreator.createPlot(eq(LocalDate.parse("2022-12-02")),any(HttpServletRequest.class),eq("Data for the date 2022-12-02"),eq("Max"),eq("Maxina"))).thenReturn("ploturlday");
-        when(plotCreator.createPlot(eq(LocalDate.parse("2022-12-02")),any(HttpServletRequest.class),eq("Data for the last 7 days since 2022-12-02"),eq("Max"),eq("Maxina"))).thenReturn("ploturlweek");
+        when(plotCreator.createPlot(eq(LocalDate.parse("2022-12-02")),any(HttpServletRequest.class),eq("Data of the last 7 days since 2022-12-02"),eq("Max"),eq("Maxina"))).thenReturn("ploturlweek");
         this.mockMvc
                 .perform(post("/plot/candidates").with(csrf())
-                        .param("date", "2022-12-02"))
+                        .param("date", "2022-12-02")
+                        .param("presidentNames", new String[]{"Max", "Maxina"}))
                 .andExpect(status().isOk())
                 .andExpect(view().name("candidatesplot"))
                 .andExpect(model().attribute("plotpathday", "ploturlday"))
                 .andExpect(model().attribute("plotpathweek","ploturlweek"));
 
-        verify(plotCreator, times(1)).setPlotProperties("day","Name","contract");
-        verify(plotCreator, times(1)).setPlotProperties("week","Name","contract");
+        verify(plotCreator, atLeast(1)).setPlotProperties("day","Name","contract");
+        verify(plotCreator, atLeast(1)).setPlotProperties("week","Name","contract");
         verify(plotCreator, times(2)).createPlot(any(),any(),any(),any());
     }
 }
