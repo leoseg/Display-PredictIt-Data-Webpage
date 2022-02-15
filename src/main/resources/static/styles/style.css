@@ -3,6 +3,12 @@ h3{
     text-shadow: black;
     
 }
+
+
+label{
+    margin-left: 30px;
+}
+
 h1{
     color: cadetblue;
 }
@@ -29,12 +35,13 @@ input{
     padding: 10px;
 }
 button {
-    color: black!important;
+
     text-decoration: none;
     font-family: "Noto Sans CJK SC";
     background: rgb(245, 255, 255);;
     padding: 10px;
     margin:10px;
+    margin-left: 20px;
     border-radius: 20px;
     display: inline-block;
     border: none;
@@ -45,5 +52,45 @@ button:hover{
     -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     transition: all 0.4s ease 0s;
+
+}
+
+.dropdown-menu label {
+    display: list-item;
+    padding: 3px 10px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    margin:0;
+    alignment: center;
+    transition: background-color .4s ease;
+}
+
+.dropdown-menu {
+    margin: 15px;
+    size: 200px;
+    alignment: center;
+
+}
+.dropdown-item{
+    margin-left: 0px !important;
+    alignment: center !important;
+
+}
+
+
+.dropdown-menu input {
+    margin: 0px 5px;
+    top: 0px;
+    position: relative;
+    display: inline-list-item;
+}
+.checkbox input[type=checkbox]{
+    position: absolute;
+    margin-left: -20px;
+    alignment: center;
+    display: list-item;
 
 }

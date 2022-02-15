@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css"
+          rel="stylesheet">
     <link th:href="@{/styles/style.css}" rel="stylesheet" />
 </head>
 <body>
@@ -18,28 +20,34 @@
 </form>
 
 </div>
-<form method="post" th:action="@{/plot/candidates(date=${localDate})}" th:object="${plotInfo}">
 <h3>Plot data of different candidates:</h3>
-    <div class="row">
-<label for="candidateNames">Select Candidates</label>
-    </div>
-    <div class="row">
-<select class="selectpicker" multiple="multiple" th:field="*{presidentNames}"  id="candidateNames" size="10">
+<div class="row">
 
-    <option th:each="candidate : ${candidateNames}"
-            th:value="${candidate.getName}"
-            th:text="${candidate.getName}">
-    </option>
 
-</select>
-    </div>
-    <div class="all-classes-container">
-        <button type="submit" name="submit" value="value" class="link-button">Candidate Plot</button>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select Candidates
+    </button>
+    <form method="post" th:action="@{/plot/candidates(date=${localDate})}" th:object="${plotInfo}"  >
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"  id="candidateNames" size="5">
+        <div th:each="candidate : ${candidateNames}">
+            <label>
+            <input type="checkbox" class="dropdown-item" href="#" th:field="*{presidentNames}"
+                   th:text="${candidate.getName}" th:value="${candidate.getName}"/>
+            </label>
         </div>
-    </div>
-</form>
 
+        </div>
+        <div class="all-classes-container">
+            <button type="submit" name="submit" value="value" class="link-button">Candidate Plot</button>
+        </div>
 
+    </form>
+</div>
+</div>
+<script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+<script src="webjars/popper.js/1.12.9-1/umd/popper.js"></script>
+<script src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
 
 
 </body>
