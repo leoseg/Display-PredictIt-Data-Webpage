@@ -5,8 +5,24 @@ h3{
 }
 
 
-label{
-    margin-left: 30px;
+label {
+    display: inline-block;
+    padding-left: 15px;
+    text-indent: -15px;
+    margin-left: 1px;
+    margin-bottom: 1px;
+    vertical-align: center;
+}
+input[type=checkbox] {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    margin: 0;
+    vertical-align: center;
+    margin-left: 2px;
+    position: relative;
+
+    display: inline-block;
 }
 
 h1{
@@ -18,9 +34,6 @@ img {
 }
 body {
     background-color: lightblue;
-}
-.form-dropdown {
-    -webkit-appearance: listbox !important;
 }
 
 select{
@@ -55,42 +68,5 @@ button:hover{
 
 }
 
-.dropdown-menu label {
-    display: list-item;
-    padding: 3px 10px;
-    clear: both;
-    font-weight: normal;
-    line-height: 1.42857143;
-    color: #333;
-    white-space: nowrap;
-    margin:0;
-    alignment: center;
-    transition: background-color .4s ease;
-}
-
-.dropdown-menu {
-    margin: 15px;
-    size: 200px;
-    alignment: center;
-
-}
-.dropdown-item{
-    margin-left: 0px !important;
-    alignment: center !important;
-
-}
 
 
-.dropdown-menu input {
-    margin: 0px 5px;
-    top: 0px;
-    position: relative;
-    display: inline-list-item;
-}
-.checkbox input[type=checkbox]{
-    position: absolute;
-    margin-left: -20px;
-    alignment: center;
-    display: list-item;
-
-}
