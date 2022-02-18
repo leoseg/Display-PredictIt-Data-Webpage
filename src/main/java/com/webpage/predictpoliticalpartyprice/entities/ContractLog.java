@@ -2,28 +2,29 @@ package com.webpage.predictpoliticalpartyprice.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.jdbc.core.convert.Jsr310TimestampBasedConverters;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 /**
  * ContractLog oject represents the average of contractdata over the given timestamp with the same label
+ * a Contract is a bet on a presidentcandidate
  */
-public class ContractLog {
+public class ContractLog extends Log{
 
-    @Getter
+
     @Setter
+    @Getter
     LocalDateTime timestamp;
 
-    @Getter
+
     @Setter
-    Double tradePrice;
+    @Getter
+    double logvalue;
 
     public ContractLog(){}
 
-    public ContractLog(Double tradePrice, LocalDateTime timestamp){
-        setTradePrice(tradePrice);
+    public ContractLog(Double logvalue, LocalDateTime timestamp){
+        setLogvalue(logvalue);
         setTimestamp(timestamp);
     }
 

@@ -4,24 +4,28 @@ package com.webpage.predictpoliticalpartyprice.daotests;
 import com.webpage.predictpoliticalpartyprice.dao.UserRepository;
 import com.webpage.predictpoliticalpartyprice.entities.User;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @DataJpaTest
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class UserRepositoryTests {
 
     @Resource
-    private TestEntityManager entityManager;
+    TestEntityManager entityManager;
 
     @Resource
-    private UserRepository repo;
+    UserRepository repo;
 
     @Test
     public void givenUser_whenRepoSaveUser_thenEntityManagerFindUserShouldFindUser(){

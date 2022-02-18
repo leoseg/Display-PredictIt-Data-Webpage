@@ -1,11 +1,13 @@
 package com.webpage.predictpoliticalpartyprice;
+import com.webpage.predictpoliticalpartyprice.controller.PlotController;
+import com.webpage.predictpoliticalpartyprice.dao.ContractDataRepository;
 import com.webpage.predictpoliticalpartyprice.dao.ContractLogDayDao;
 import com.webpage.predictpoliticalpartyprice.dao.ContractLogWeekDao;
 import com.webpage.predictpoliticalpartyprice.mapper.ContractLogRowMapper;
-import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
+import com.webpage.predictpoliticalpartyprice.plotclasses.PlotCreator;
+import com.webpage.predictpoliticalpartyprice.services.LogService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -15,11 +17,11 @@ import javax.annotation.Resource;
 class PredictPoliticalPartyPriceApplicationTests {
     @Resource
     @Qualifier("week")
-    ContractLogService contractLogWeekService;
+    LogService contractLogWeekService;
 
     @Resource
     @Qualifier("day")
-    ContractLogService contractLogDayService;
+    LogService contractLogDayService;
 
     @Resource
     ContractLogRowMapper contractLogRowMapper;
@@ -30,6 +32,12 @@ class PredictPoliticalPartyPriceApplicationTests {
     @Resource
     ContractLogWeekDao contractLogDaoDay;
 
+    @Resource
+    ContractDataRepository contractDataRepository;
+
+    @Resource
+    PlotCreator plotCreator;
+
 
     @Test
     void contextLoads() {
@@ -38,6 +46,8 @@ class PredictPoliticalPartyPriceApplicationTests {
         Assertions.assertNotNull(contractLogRowMapper);
         Assertions.assertNotNull(contractLogDayService);
         Assertions.assertNotNull(contractLogWeekService);
+        Assertions.assertNotNull(contractDataRepository);
+        Assertions.assertNotNull(plotCreator);
     }
 
 }
