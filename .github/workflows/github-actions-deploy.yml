@@ -18,8 +18,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Clean instance from docker images
         run: |
-          - docker kill $(docker ps -q)
-          - docker system prune --volumes -f
+          docker kill $(docker ps -q)
+          docker system prune --volumes -f
       - name: Update image
         run: docker-compose pull
       - name: Bring containers up
