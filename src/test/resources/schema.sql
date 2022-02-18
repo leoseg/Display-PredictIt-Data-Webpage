@@ -1,11 +1,12 @@
+DROP TABLE IF EXISTS contractdata;
 CREATE TABLE contractdata (
     "label" CHAR(50),
-    "candidateId" INT,
+    "candidateid" INT,
     "name" CHAR(50),
-    "marketId" INT,
-    "marketName" CHAR(50)
+    "marketid" INT,
+    "marketname" CHAR(50)
 );
-
+DROP TABLE IF EXISTS contract_log;
 CREATE TABLE contract_log(
     "id" BIGINT,
     "candidate_id" INT,
@@ -15,7 +16,7 @@ CREATE TABLE contract_log(
     "bestBuyNoCost" DOUBLE PRECISION
 );
 
-INSERT INTO contractdata ("label","candidateId","name","marketId","marketName") VALUES
+INSERT INTO contractdata ("label",candidateid,"name",marketid,marketname) VALUES
         ('liberal',28839,'Draghi',7663,'president-italia'),
         ('conservative',28836,'Berlusconi',7663,'president-italia'),
         ('liberal',26820,'Macron',7360,'president-france'),

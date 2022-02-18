@@ -1,10 +1,9 @@
 package com.webpage.predictpoliticalpartyprice.controller;
 
+import com.webpage.predictpoliticalpartyprice.dao.ContractDataRepository;
 import com.webpage.predictpoliticalpartyprice.entities.PlotInfo;
-import com.webpage.predictpoliticalpartyprice.plotclasses.ContractLogPlot;
-import com.webpage.predictpoliticalpartyprice.services.ContractLogService;
+import com.webpage.predictpoliticalpartyprice.plotclasses.PlotCreator;
 import org.jfree.chart.servlet.DisplayChart;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -27,15 +26,12 @@ import java.time.LocalDate;
 public class PlotController {
 
     @Resource
-    @Qualifier("day")
-    ContractLogService contractLogDayService;
+    ContractDataRepository contractDataRepository;
 
     @Resource
-    @Qualifier("week")
-    ContractLogService contractLogWeekService;
+    PlotCreator plotCreator;
 
-    @Resource
-    ContractLogPlot contractLogPlot;
+
     /**
      * Registrates the Servlet for displaying the chart at the website
      * @return new registration bean
@@ -50,10 +46,10 @@ public class PlotController {
     @PostMapping(value="/week")
     public String showWeekPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
-        contractLogPlot.addContractLogsByLabel(contractLogWeekService,date,"liberal","conservative");
-        contractLogPlot.createChart("Data of the last 7 days since "+date);
-        model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
-        model.addAttribute("localDate", LocalDate.now());
+        plotCreator.setPlotProperties("week","PoliticalLabel","contract");
+        String title = "Data of the last 7 days since "+date;
+        model.addAttribute("plotpath",plotCreator.createPlot(date,request,title,"liberal","conservative"));
+        model.addAttribute("localDate", LocalDate.now().toString());
         return "weekplot";
     }
 
@@ -63,18 +59,33 @@ public class PlotController {
     @PostMapping(value="/day")
     public String showDayPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
-        contractLogPlot.addContractLogsByLabel(contractLogDayService,date,"liberal","conservative");
-        contractLogPlot.createChart("Data for the date "+date);
-        model.addAttribute("plotpath", contractLogPlot.saveAsJpgServlet(request));
-        model.addAttribute("localDate", LocalDate.now());
+        plotCreator.setPlotProperties("day","PoliticalLabel","contract");
+        model.addAttribute("plotpath", plotCreator.createPlot(date,request,"Data for the date "+date,"liberal","conservative"));
+        model.addAttribute("localDate", LocalDate.now().toString());
         return "dayplot";
+    }
+
+    /*
+    Creates and shows plot of different candidates
+    */
+    @PostMapping(value="/candidates")
+    public String showCandidatesPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
+        LocalDate date = LocalDate.parse(plotInfo.getDate());
+        String[] candidateNames = plotInfo.getPresidentNames().toArray(new String[0]);
+        plotCreator.setPlotProperties("day","Name","contract");
+        model.addAttribute("plotpathday", plotCreator.createPlot(date,request,"Data for the date "+date,candidateNames));
+        plotCreator.setPlotProperties("week","Name","contract");
+        model.addAttribute("plotpathweek", plotCreator.createPlot(date,request,"Data of the last 7 days since "+date,candidateNames));
+        return "candidatesplot";
     }
     /*
     Shows the homepage of plots, with one button leading to the dayplot and one to the weekplot
      */
     @GetMapping()
     public String showPlotHome(Model model){
+        model.addAttribute("candidateNames",contractDataRepository.findAll());
         model.addAttribute("localDate", LocalDate.now().toString());
+        model.addAttribute("plotInfo",new PlotInfo());
         return "plothome";
     }
 

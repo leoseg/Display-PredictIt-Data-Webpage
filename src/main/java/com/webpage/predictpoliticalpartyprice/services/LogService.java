@@ -8,13 +8,14 @@ import java.util.List;
 /**
  * Service for accessing the contractlog data
  */
-public interface ContractLogService {
+public interface LogService {
 
     /**
      * Gets a list of contractlogs with the same label
      * @param label label of contratlogs
      * @param date date for getting the data
+     * @param attribute to choose column by
      * @return list of contractlogs object
      */
-    List<ContractLog> getContractLogsByLabel(String label, LocalDate date);
+    List<ContractLog> getContractLogs(String label, String attribute,LocalDate date);
 }

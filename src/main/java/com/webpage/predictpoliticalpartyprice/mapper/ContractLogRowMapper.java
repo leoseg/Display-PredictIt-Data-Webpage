@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 
 /**
@@ -24,7 +23,7 @@ public class ContractLogRowMapper implements RowMapper<ContractLog> {
     public ContractLog mapRow(ResultSet rs, int rowNum) throws SQLException {
         ContractLog contractLog = new ContractLog();
         contractLog.setTimestamp(rs.getTimestamp(2).toLocalDateTime());//.plus(1,ChronoUnit.HOURS));
-        contractLog.setTradePrice(rs.getDouble(1));
+        contractLog.setLogvalue(rs.getDouble(1));
         return contractLog;
     }
 }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+    <title>Candidates Plot</title>
+</head>
+<body>
+<div class="all-classes-container" >
+
+    <div class="all-classes-container">
+        <img th:src="${plotpathday}"   />
+
+    </div>
+    <div class="all-classes-container">
+        <img th:src="${plotpathweek}"   />
+
+    </div>
+    <form method="get" th:action="@{/plot}" >
+        <button type="submit" name="submit" value="value" class="link-button">Back to startpage</button>
+    </form>
+</div>
+
+</body>
+</html>

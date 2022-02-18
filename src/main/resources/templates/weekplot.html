@@ -8,9 +8,12 @@
 <body>
 <div class="container">
                 <img th:src="${plotpath}" />
-<form method="post" th:action="@{/plot/day(date=${#temporals.format(localDate, 'yyyy-MM-DD')})}">
+<form method="post" th:action="@{/plot/day(date=${localDate})}">
     <button type="submit" name="submit" value="value" class="link-button">Day Data</button>
 </form>
+    <form method="get" th:action="@{/plot}" >
+        <button type="submit" name="submit" value="value" class="link-button">Back to startpage</button>
+    </form>
 </div>
 </body>
 </html>

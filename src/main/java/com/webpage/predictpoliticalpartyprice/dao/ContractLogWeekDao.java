@@ -10,9 +10,11 @@ public interface ContractLogWeekDao {
     /**
      * Gets list of contractlogs with same label grouped by the time with their average latestTradePrice
      * @param date date to use
-     * @param Label only contractlogs with this label are requested
+     * @param label only contractlogs with has the samel label for the attribute are choosen
+     * @param attribute choose contracty by this attribute
      * @return list of contractlog objects
      */
-    List<ContractLog> getListOfContractLogs(LocalDate date, String Label);
+    List<ContractLog> getListOfContractLogs(LocalDate date, String label,String attribute);
+
 
 }
