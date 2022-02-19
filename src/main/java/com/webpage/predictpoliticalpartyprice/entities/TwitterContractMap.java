@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * Maps name of contract to corresponding hashtag for tweetcounts also contains translation and the kafka topic its from
+ */
 @Entity
 @Table(name="twittercontractmap")
 public class TwitterContractMap {
