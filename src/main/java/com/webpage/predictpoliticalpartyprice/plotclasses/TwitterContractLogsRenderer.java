@@ -65,7 +65,7 @@ public class TwitterContractLogsRenderer extends XYLineAndShapeRenderer {
      */
     @Override
     public Paint getItemPaint(int row,int column){
-        if (row >=numberSeries){
+        if (row >numberSeries){
             return super.getItemPaint(row -numberSeries, column);
         }else{
             return super.getItemPaint(row,column);

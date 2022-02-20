@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 /**
- * Class for creating different timeseries-plots
+ * Facade calss for creating different timeseries-plots as jpeg
  */
 @Service
 public class PlotCreator {

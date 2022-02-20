@@ -25,7 +25,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Class for plotting the contractlogs over time
+ * Class for creatig time-series plots from given data
  */
 @Service
 public class LogPlot {
@@ -77,6 +77,7 @@ public class LogPlot {
     public void createChart(String title,String xAxisLabel){
         chart = ChartFactory.createTimeSeriesChart(title,"Time",xAxisLabel,timeSeriesCollection);
         chart.getPlot().setBackgroundPaint( Color.WHITE );
+        chart.getLegend().setBackgroundPaint(Color.BLACK);
 
 
     }
