@@ -1,11 +1,14 @@
 package com.webpage.predictpoliticalpartyprice;
-import com.webpage.predictpoliticalpartyprice.controller.PlotController;
 import com.webpage.predictpoliticalpartyprice.dao.ContractDataRepository;
-import com.webpage.predictpoliticalpartyprice.dao.ContractLogDayDao;
-import com.webpage.predictpoliticalpartyprice.dao.ContractLogWeekDao;
+import com.webpage.predictpoliticalpartyprice.dao.LogDayDao;
+import com.webpage.predictpoliticalpartyprice.dao.LogWeekDao;
+import com.webpage.predictpoliticalpartyprice.dao.TwitterContractMapRepository;
 import com.webpage.predictpoliticalpartyprice.mapper.ContractLogRowMapper;
+import com.webpage.predictpoliticalpartyprice.mapper.TwitterHashtagCountLogRowMapper;
 import com.webpage.predictpoliticalpartyprice.plotclasses.PlotCreator;
+import com.webpage.predictpoliticalpartyprice.plotclasses.TwitterContractLogsRenderer;
 import com.webpage.predictpoliticalpartyprice.services.LogService;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,16 +30,25 @@ class PredictPoliticalPartyPriceApplicationTests {
     ContractLogRowMapper contractLogRowMapper;
 
     @Resource
-    ContractLogDayDao contractLogDaoWeek;
+    LogDayDao contractLogDaoWeek;
 
     @Resource
-    ContractLogWeekDao contractLogDaoDay;
+    LogWeekDao contractLogDaoDay;
 
     @Resource
     ContractDataRepository contractDataRepository;
 
     @Resource
     PlotCreator plotCreator;
+
+    @Resource
+    TwitterHashtagCountLogRowMapper twitterHashtagCountLogRowMapper;
+
+    @Resource
+    TwitterContractLogsRenderer twitterContractLogsRenderer;
+
+    @Resource
+    TwitterContractMapRepository twitterContractMapRepository;
 
 
     @Test
@@ -48,6 +60,9 @@ class PredictPoliticalPartyPriceApplicationTests {
         Assertions.assertNotNull(contractLogWeekService);
         Assertions.assertNotNull(contractDataRepository);
         Assertions.assertNotNull(plotCreator);
+        Assertions.assertNotNull(twitterContractLogsRenderer);
+        Assertions.assertNotNull(twitterContractMapRepository);
+        Assertions.assertNotNull(twitterHashtagCountLogRowMapper);
     }
 
 }
