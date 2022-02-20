@@ -1,6 +1,7 @@
 package com.webpage.predictpoliticalpartyprice.services;
 
 import com.webpage.predictpoliticalpartyprice.entities.ContractLog;
+import com.webpage.predictpoliticalpartyprice.entities.TwitterHashtagCountLog;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,4 +19,14 @@ public interface LogService {
      * @return list of contractlogs object
      */
     List<ContractLog> getContractLogs(String label, String attribute,LocalDate date);
-}
+
+    /**
+     * Gets a list of twitterhashtagcountlogs with the same label
+     * @param label label of contratlogs
+     * @param date date for getting the data
+     * @return list of contractlogs object
+     */
+    List<TwitterHashtagCountLog> getTwitterHashtagCountLog(String label,LocalDate date);
+
+
+ }

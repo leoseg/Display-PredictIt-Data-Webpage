@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+/**
+ * Object that contains tweetcount for given timestamp and totaltweetcount for last 7 days
+ */
 public class TwitterHashtagCountLog {
 
 
@@ -19,6 +22,14 @@ public class TwitterHashtagCountLog {
     @Getter
     @Setter
     int tweetCount;
+
+    public TwitterHashtagCountLog(LocalDateTime timestamp,int totalTweetCount, int tweetCount){
+        setTweetCount(tweetCount);
+        setTimestamp(timestamp);
+        setTotalTweetCount(totalTweetCount);
+    }
+
+    public  TwitterHashtagCountLog(){}
 
 
 }
