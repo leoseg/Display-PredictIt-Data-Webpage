@@ -23,7 +23,7 @@ public class ContractLogRowMapper implements RowMapper<ContractLog> {
     public ContractLog mapRow(ResultSet rs, int rowNum) throws SQLException {
         ContractLog contractLog = new ContractLog();
         contractLog.setTimestamp(rs.getTimestamp(2).toLocalDateTime());//.plus(1,ChronoUnit.HOURS));
-        contractLog.setLogvalue(rs.getDouble(1));
+        contractLog.setLastTradePrice(rs.getDouble(1));
         return contractLog;
     }
 }

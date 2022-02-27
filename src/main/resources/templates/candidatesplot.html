@@ -6,14 +6,14 @@
     <title>Candidates Plot</title>
 </head>
 <body>
-<div class="all-classes-container" >
+<div class="all-classes-container" style="height: 100%"  >
 
-    <div class="all-classes-container">
-        <img th:src="${plotpathday}"   />
+    <div class="all-classes-container" style="display: inline-block; height: 100%" >
+        <img th:src="${plotpathday}"   style="height: 100%" />
 
     </div>
-    <div class="all-classes-container">
-        <img th:src="${plotpathweek}"   />
+    <div class="all-classes-container" style="display: inline-block; height: 100%">
+        <img th:src="${plotpathweek}" style="height: 100%"  />
 
     </div>
     <form method="get" th:action="@{/plot}" >

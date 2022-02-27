@@ -1,6 +1,7 @@
 package com.webpage.predictpoliticalpartyprice.controller;
 
 import com.webpage.predictpoliticalpartyprice.dao.ContractDataRepository;
+import com.webpage.predictpoliticalpartyprice.dao.TwitterContractMapRepository;
 import com.webpage.predictpoliticalpartyprice.entities.PlotInfo;
 import com.webpage.predictpoliticalpartyprice.plotclasses.PlotCreator;
 import org.jfree.chart.servlet.DisplayChart;
@@ -26,7 +27,7 @@ import java.time.LocalDate;
 public class PlotController {
 
     @Resource
-    ContractDataRepository contractDataRepository;
+    TwitterContractMapRepository twitterContractMapRepository;
 
     @Resource
     PlotCreator plotCreator;
@@ -66,15 +67,15 @@ public class PlotController {
     }
 
     /*
-    Creates and shows plot of different candidates
+    Creates and shows plot of different candidates (contracts) together with corresponding hashtags
     */
     @PostMapping(value="/candidates")
     public String showCandidatesPlot(@ModelAttribute PlotInfo plotInfo, Model model, HttpServletRequest request) throws IOException {
         LocalDate date = LocalDate.parse(plotInfo.getDate());
         String[] candidateNames = plotInfo.getPresidentNames().toArray(new String[0]);
-        plotCreator.setPlotProperties("day","Name","contract");
+        plotCreator.setPlotProperties("day","Name","contract","twitter");
         model.addAttribute("plotpathday", plotCreator.createPlot(date,request,"Data for the date "+date,candidateNames));
-        plotCreator.setPlotProperties("week","Name","contract");
+        plotCreator.setPlotProperties("week","Name","contract","twitter");
         model.addAttribute("plotpathweek", plotCreator.createPlot(date,request,"Data of the last 7 days since "+date,candidateNames));
         return "candidatesplot";
     }
@@ -83,7 +84,7 @@ public class PlotController {
      */
     @GetMapping()
     public String showPlotHome(Model model){
-        model.addAttribute("candidateNames",contractDataRepository.findAll());
+        model.addAttribute("candidateNames",twitterContractMapRepository.findAll());
         model.addAttribute("localDate", LocalDate.now().toString());
         model.addAttribute("plotInfo",new PlotInfo());
         return "plothome";

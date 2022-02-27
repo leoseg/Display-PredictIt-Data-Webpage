@@ -1,15 +1,10 @@
 package com.webpage.predictpoliticalpartyprice.controllertests;
 
 import com.webpage.predictpoliticalpartyprice.controller.PlotController;
-import com.webpage.predictpoliticalpartyprice.dao.ContractDataRepository;
+import com.webpage.predictpoliticalpartyprice.dao.TwitterContractMapRepository;
 import com.webpage.predictpoliticalpartyprice.dao.UserRepository;
-import com.webpage.predictpoliticalpartyprice.entities.ContractData;
-import com.webpage.predictpoliticalpartyprice.entities.PlotInfo;
-import com.webpage.predictpoliticalpartyprice.plotclasses.LogPlot;
 import com.webpage.predictpoliticalpartyprice.plotclasses.PlotCreator;
-import com.webpage.predictpoliticalpartyprice.services.LogService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -26,8 +21,6 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -42,7 +35,7 @@ class PlotControllerTests {
     PlotCreator plotCreator;
 
     @MockBean
-    ContractDataRepository contractDataRepository;
+    TwitterContractMapRepository twitterContractMapRepository;
 
 
     @Test
@@ -92,7 +85,7 @@ class PlotControllerTests {
                 .andExpect(model().attributeExists("plotInfo"))
                 .andExpect(model().attribute("localDate",LocalDate.now().toString()))
                 .andExpect(model().attributeExists("candidateNames"));
-        verify(contractDataRepository,times(1)).findAll();
+        verify(twitterContractMapRepository,times(1)).findAll();
     }
 
     @Test
@@ -116,8 +109,8 @@ class PlotControllerTests {
                 .andExpect(model().attribute("plotpathday", "ploturlday"))
                 .andExpect(model().attribute("plotpathweek","ploturlweek"));
 
-        verify(plotCreator, atLeast(1)).setPlotProperties("day","Name","contract");
-        verify(plotCreator, atLeast(1)).setPlotProperties("week","Name","contract");
+        verify(plotCreator, atLeast(1)).setPlotProperties("day","Name","contract","twitter");
+        verify(plotCreator, atLeast(1)).setPlotProperties("week","Name","contract","twitter");
         verify(plotCreator, times(2)).createPlot(any(),any(),any(),any());
     }
 }
