@@ -26,4 +26,8 @@ The next step is to get data for a hashtag count corresponding to some of the ca
 Is relative simple in the moment. Spring boot web is used for creating the webcontainer and jfreechart is used for creating the charts. 
 The html pages are rendered by thymeleaf. Data is stored in a postgresl database. 
 
+## Bugs and Infos
+Because the projekt is still in its beginnings there are still some bugs:
+- data collection runs local (cause of cost reasons) so sometimes data leaks occure
+- there are still occurring errors see issues in [other repository](https://github.com/leoseg/PredictitDataProcessing) and here 
 
