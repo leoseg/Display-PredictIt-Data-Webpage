@@ -48,18 +48,21 @@ public class LogPlot {
      */
     private void addContractLogs(List<ContractLog> logList, String label){
         TimeSeries timeSeries = new TimeSeries(label);
-        for(ContractLog Log: logList){
-            LocalDateTime localDateTime = Log.getTimestamp();
-            Millisecond millisecond = new Millisecond(
-                    0,
-                    localDateTime.getSecond(),
-                    localDateTime.getMinute(),
-                    localDateTime.getHour(),
-                    localDateTime.getDayOfMonth(),
-                    localDateTime.getMonthValue(),
-                    localDateTime.getYear());
-            timeSeries.add(millisecond,Log.getLastTradePrice());
+        if(!logList.isEmpty()){
+            for(ContractLog Log: logList){
+                LocalDateTime localDateTime = Log.getTimestamp();
+                Millisecond millisecond = new Millisecond(
+                        0,
+                        localDateTime.getSecond(),
+                        localDateTime.getMinute(),
+                        localDateTime.getHour(),
+                        localDateTime.getDayOfMonth(),
+                        localDateTime.getMonthValue(),
+                        localDateTime.getYear());
+                timeSeries.add(millisecond,Log.getLastTradePrice());
+            }
         }
+
         timeSeriesCollection.addSeries(timeSeries);
     }
 
@@ -135,23 +138,27 @@ public class LogPlot {
      * @param label label of the timeseries
      */
     public void addTwitterHashtagCountLogs(List<TwitterHashtagCountLog> logList,String label,boolean doScaling){
-        int maxTweetcount= 1;
-        if(doScaling){
-            maxTweetcount = Collections.max(logList, Comparator.comparing(TwitterHashtagCountLog::getTweetCount)).getTweetCount();
-            label += " scaled to 0-1 with max tweetcount "+maxTweetcount;
-        }
         TimeSeries timeSeries = new TimeSeries(label);
-        for(TwitterHashtagCountLog Log: logList){
-            LocalDateTime localDateTime = Log.getTimestamp();
-            Millisecond millisecond = new Millisecond(
-                    0,
-                    localDateTime.getSecond(),
-                    localDateTime.getMinute(),
-                    localDateTime.getHour(),
-                    localDateTime.getDayOfMonth(),
-                    localDateTime.getMonthValue(),
-                    localDateTime.getYear());
-            timeSeries.add(millisecond, (double) Log.getTweetCount() /maxTweetcount);
+        if (!logList.isEmpty()) {
+
+            int maxTweetcount = 1;
+            if (doScaling) {
+                maxTweetcount = Collections.max(logList, Comparator.comparing(TwitterHashtagCountLog::getTweetCount)).getTweetCount();
+                label += " scaled to 0-1 with max tweetcount " + maxTweetcount;
+            }
+
+            for (TwitterHashtagCountLog Log : logList) {
+                LocalDateTime localDateTime = Log.getTimestamp();
+                Millisecond millisecond = new Millisecond(
+                        0,
+                        localDateTime.getSecond(),
+                        localDateTime.getMinute(),
+                        localDateTime.getHour(),
+                        localDateTime.getDayOfMonth(),
+                        localDateTime.getMonthValue(),
+                        localDateTime.getYear());
+                timeSeries.add(millisecond, (double) Log.getTweetCount() / maxTweetcount);
+            }
         }
         timeSeriesCollection.addSeries(timeSeries);
     }
