@@ -63,10 +63,9 @@ public class TwitterContractLogsRendererTests {
 
     @Test
     void givenRowSmallerThanNumberSeries_rendererGetItemPaint_shouldReturnParentGetItemPaint(){
-        XYLineAndShapeRenderer xyLineAndShapeRenderer = new XYLineAndShapeRenderer();
         TwitterContractLogsRenderer twitterContractLogsRenderer = new TwitterContractLogsRenderer();
         twitterContractLogsRenderer.setNumberSeries(4);
-        assert twitterContractLogsRenderer.getItemPaint(3,0).equals(xyLineAndShapeRenderer.getItemPaint(3,0));
+        assert twitterContractLogsRenderer.getItemPaint(3,0).equals(Color.MAGENTA);
     }
 
     @Test
@@ -74,7 +73,7 @@ public class TwitterContractLogsRendererTests {
         XYLineAndShapeRenderer xyLineAndShapeRenderer = new XYLineAndShapeRenderer();
         TwitterContractLogsRenderer twitterContractLogsRenderer = new TwitterContractLogsRenderer();
         twitterContractLogsRenderer.setNumberSeries(4);
-        assert twitterContractLogsRenderer.getItemPaint(5,0).equals(xyLineAndShapeRenderer.getItemPaint(1,0));
+        assert twitterContractLogsRenderer.getItemPaint(7,0).equals(Color.MAGENTA);
     }
 
     @Test
