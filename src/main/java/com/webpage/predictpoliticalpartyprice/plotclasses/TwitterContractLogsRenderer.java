@@ -6,6 +6,8 @@ import org.jfree.chart.util.ShapeUtils;
 import org.springframework.stereotype.Component;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -18,7 +20,7 @@ public class TwitterContractLogsRenderer extends XYLineAndShapeRenderer {
 
     Stroke dashed = new BasicStroke(2.0f,BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, new float[] {10.0f}, 0.0f);
 
-
+    List<Color> colorList = Arrays.asList(Color.GREEN,Color.RED,Color.CYAN,Color.MAGENTA,Color.ORANGE,Color.PINK,Color.YELLOW);
 
 
 
@@ -58,17 +60,19 @@ public class TwitterContractLogsRenderer extends XYLineAndShapeRenderer {
     /**
      * Overrides the parent method to customize the paint of the points of the plots,
      * so twitterhashtagcounts and the corresponding contract have the same color, does that by repeating the
-     * parent method for getItemPaint for all twitterhashtagcount series (row number bigger than numberSeries)
+     * method for getting color from the list for all twitterhashtagcount series (row number bigger than numberSeries)
      * @param row row which marks the series
      * @param column which marks the entry of a series
      * @return Paint object
      */
     @Override
     public Paint getItemPaint(int row,int column){
-        if (row >numberSeries){
-            return super.getItemPaint(row -numberSeries, column);
+        if (row >=numberSeries){
+            return colorList.get(row - numberSeries);
+            //return super.getItemPaint(row -numberSeries, column);
         }else{
-            return super.getItemPaint(row,column);
+            return colorList.get(row);
+            //return super.getItemPaint(row,column);
         }
 
     }
