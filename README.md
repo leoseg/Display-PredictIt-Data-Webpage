@@ -1,7 +1,5 @@
 # Display-PredictIt-Data-Webpage
-Webapplication project which displays the data collected by my other project PredictitDataProcessing. The page is hosted with google cloud and available at:
-
-[Link to Page](http://predictitplots.org/plot)
+Webapplication project which displays the data collected by my other project PredictitDataProcessing. The Page is not up at the moment due to financial cost reasons.
 
 ## Data displayed
 
